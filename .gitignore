@@ -1,5 +1,8 @@
 /.directory
 out/
+target/
+
+#
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -16,5 +19,4 @@ hs_err_pid*
 .idea
 *.iml
 
-target
 
