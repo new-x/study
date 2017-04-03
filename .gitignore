@@ -1,6 +1,6 @@
 /.directory
-out/
-target/
+out
+target
 
 #
 *.class
