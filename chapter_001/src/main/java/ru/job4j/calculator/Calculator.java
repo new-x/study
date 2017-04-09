@@ -41,6 +41,15 @@ public class Calculator {
     }
 
     /**
+     * Умножение.
+     * @param first первый аргумент
+     * @param second второй аргумент
+     */
+    public void multiple(double first, double second) {
+        this.result = first * second;
+    }
+
+    /**
      * Возвращает значение поля класса.
      * @return result возвращаемое значение
      */

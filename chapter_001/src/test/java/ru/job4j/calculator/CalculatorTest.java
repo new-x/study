@@ -44,10 +44,22 @@ public class CalculatorTest {
     @Test
     public void testDiv() {
         Calculator calc = new Calculator();
-        calc.Div(5d, 5d);
+        calc.div(5d, 5d);
         double resultDiv = calc.getResult();
         double expected = 1d;
         assertThat(resultDiv, is(expected));
+    }
+
+    /**
+    * Тестируем умножение.
+    */
+    @Test
+    public void testMultiple() {
+        Calculator calc = new Calculator();
+        calc.multiple(5d, 5d);
+        double resultMultiple = calc.getResult();
+        double expected = 25.0;
+        assertThat(resultMultiple, is(expected));
     }
 
 
