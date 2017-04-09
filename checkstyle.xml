@@ -20,7 +20,6 @@
 -->
 
 <module name="Checker">
-
     <!--Расширение файла должно быть java, properties, xml-->
     <property name="fileExtensions" value="java, properties, xml"/>
 
@@ -142,5 +141,4 @@
         <module name="UpperEll"/>
 
     </module>
-
 </module>
