@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.calculate;
 /**
 * Class Calculate решение задачи части 001 урок 1.
 * @author alekseev
