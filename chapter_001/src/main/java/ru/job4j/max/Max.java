@@ -6,7 +6,7 @@ package ru.job4j.max;
 * @since 1.0
 */
 
-public class Max{
+public class Max {
 
 /**
 * Метод получает на вход 2 числа и возвращает то, что больше.
@@ -15,8 +15,9 @@ public class Max{
 * @return возвращает большее число.
 */
 
-public int findMaxNumber(final int first, final int second)
+public int findMaxNumber(final int first, final int second) {
 
     return first > second ? first : second;
+    }
 
 }
