@@ -39,7 +39,7 @@ public Triangle(Point a, Point b, Point c) {
 public double area() {
   double square;
   square = 0.5 * ((b.getX() - a.getX()) * (c.getY() - a.getY()) - (b.getY() - a.getY()) * (c.getX() - a.getX()));
-  return square >= 0 ? square : -square;
+  return Math.abs(square);
 }
 
 }
