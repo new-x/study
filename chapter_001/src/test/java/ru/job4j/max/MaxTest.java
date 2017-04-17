@@ -12,45 +12,26 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 
-public class MaxTest {
+ public class MaxTest {
+ 	/**
+ 	* Тест поиска максимального значения из двух заданных.
+ 	*/
+ 	@Test
+ 	public void maxTestOne() {
+ 		Max operation = new Max();
+ 		int result = operation.findMaxNumber(2, 5);
+ 		int expected = 5;
+ 		assertThat(result, is(expected));
+ 	}
 
-/**
-Тест №1 -  возврщает первое число если оно больше второго.
-*/
-
-    @Test
-    public void maxNumberOne() {
-        Max max = new Max();
-        final int first = 12;
-        final int second = 10;
-        assertThat(max.findMaxNumber(first, second), is(first));
-
-}
-
-/**
-Тест №2 -  возврщает второе число если оно больше первого.
-*/
-
-    @Test
-    public void maxNumberTwo() {
-        Max max = new Max();
-        final int first = 10;
-        final int second = 12;
-        assertThat(max.findMaxNumber(first, second), is(second));
-
-}
-
-/**
-Тест №3 -  возврщает первое число если числы равны.
-*/
-
-    @Test
-    public void maxNumberThree() {
-        Max max = new Max();
-        final int first = 10;
-        final int second = 10;
-        assertThat(max.findMaxNumber(first, second), is(first));
-
-}
-
-}
+ 	/**
+ 	* Тест поиска максимального значения из трех заданных.
+ 	*/
+ 	@Test
+ 	public void maxTestTwo() {
+ 		Max operation = new Max();
+ 		int result = operation.findMaxNumber(1, 3, 5);
+ 		int expected = 5;
+ 		assertThat(result, is(expected));
+ 	}
+ }
