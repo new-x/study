@@ -1,8 +1,8 @@
 package ru.job4j.condition;
 
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Class PointTest - Условный оператор.
@@ -17,8 +17,8 @@ public class PointTest {
  */
 @Test
 public void whenAisTwoBisFiveXisThreeYisEleven() {
-        Point point = new Point(5, 32);
-        boolean result = point.is(5, 7);
+        Point point = new Point(1, 2);
+        boolean result = point.is(1, 1);
         boolean expected = true;
         assertThat(result, is(expected));
 }
