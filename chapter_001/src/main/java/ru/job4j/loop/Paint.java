@@ -28,7 +28,7 @@ public class Paint {
 					stringbuilder.append(' ');
 					}
 			}
-			stringbuilder.append("\n\r");
+			stringbuilder.append(System.getProperty("line.separator"));
 		}
 		return stringbuilder.toString();
 	}
