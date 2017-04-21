@@ -19,7 +19,8 @@ public class PaintTest {
 	public void whenPiramidSize2ThenDrawPiramidSize2() {
 		Paint figure = new Paint();
 		String result = figure.piramid(2);
-		String expected = String.format(" ^ %s^^^", System.getProperty("line.separator"));
+		final String line = System.getProperty("line.separator");
+		String expected = String.format(" ^ %s^^^%s", line, line);
         assertThat(result, is(expected));
 	}
 		/**
@@ -29,7 +30,8 @@ public class PaintTest {
 	public void whenPiramidSize3ThenDrawPiramidSize3() {
 		Paint figure = new Paint();
 		String result = figure.piramid(3);
-		String expected = String.format("  ^  %s ^^^ %s^^^^^", System.getProperty("line.separator"));
+		final String line = System.getProperty("line.separator");
+		String expected = String.format("  ^  %s ^^^ %s^^^^^%s", line, line, line);
         assertThat(result, is(expected));
 	}
 
