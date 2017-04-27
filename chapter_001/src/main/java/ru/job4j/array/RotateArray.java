@@ -18,7 +18,7 @@ public class RotateArray {
     for (int index = 0; index < height / 2; index++) {
       for (int number = 0; number < length - 1 - index; number++) {
       int temp = array[index][number];
-      array[index][number] = array[length - index - 1][number];
+      array[index][number] = array[length - number - 1][index];
       array[length - number - 1][index] = array[length - index - 1][length - number - 1];
       array[length - index - 1][length - number - 1] = array[number][length - index - 1];
       array[number][length - index - 1] = temp;
