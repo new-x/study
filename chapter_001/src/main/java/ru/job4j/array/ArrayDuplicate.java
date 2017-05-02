@@ -16,16 +16,18 @@ public class ArrayDuplicate {
   public String[] remove(String[] array) {
     int count = 0;
     int length = array.length - 1;
-       for (int index = 0; index < array.length; index++) {
-         for (int number = index + 1; number < array.length; number++) {
+       for (int index = 0; index < array.length - count; index++) {
+         for (int number = index + 1; number < array.length - count; number++) {
            if (array[index].equals(array[number])) {
+             String temp = array[number];
+             array[number] = array[length];
+             array[length] = temp;
+             length--;
              count++;
-             //String temp = array[number];
-             //array[number] = array[number + 1];
-             //array[number + 1] = temp;
            }
          }
       }
+      /**
       for (int index = 0; index < array.length - count; index++) {
         for (int number = index + 1; number < array.length - count; number++) {
           if (array[index].equals(array[number])) {
@@ -36,7 +38,7 @@ public class ArrayDuplicate {
           }
         }
      }
-
-       return Arrays.copyOf(array, array.length - count);
+*/
+       return Arrays.copyOf(array, array.length - length);
   }
 }
