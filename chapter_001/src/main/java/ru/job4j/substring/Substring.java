@@ -26,8 +26,7 @@ public boolean contains(String origin, String sub) {
         count++;
       } else if (count == arraySub.length) {
       check = true;
-      number = arraySub.length;
-      index = arrayOrigin.length;
+      break;
     } else if (count != arraySub.length) {
       number = arraySub.length;
     }
