@@ -20,10 +20,9 @@ public boolean contains(String origin, String sub) {
   boolean check = false;
 
   for (int index = 0; index < arrayOrigin.length; index++) {
-    for (int number = 0; number < arraySub.length;) {
+    for (int number = 0; number < arraySub.length; number++) {
       int count = index;
       if (arraySub[number] == arrayOrigin[count]) {
-        number++;
         count++;
       } else if (count == arraySub.length) {
       check = true;

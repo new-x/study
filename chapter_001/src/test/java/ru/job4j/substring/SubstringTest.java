@@ -17,8 +17,8 @@ public class SubstringTest {
   @Test
   public void subSubstringOrigin() {
     Substring substring = new Substring();
-    String origin = "работа";
-    String sub = "бот";
+    String origin = "полтинник";
+    String sub = "ник";
     boolean result = substring.contains(origin, sub);
     boolean expected = true;
     assertThat(result, is(expected));
