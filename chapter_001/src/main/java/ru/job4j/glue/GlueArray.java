@@ -21,7 +21,7 @@ public class GlueArray {
 
     for (int index = 0; index < array.length; index++) {
       if (first.length > count & second.length > count) {
-        if (first[count] > second[count]) {
+        if (first[count] >= second[count]) {
           array[index] = second[count];
           array[index + 1] = first[count];
         } else {
@@ -38,27 +38,6 @@ public class GlueArray {
       count++;
     }
   }
-    /*for (int index = 0; index < array.length; index++) {
-      if (count < first.length) {
-      if (first[count] > second[count]) {
-        array[index] = second[count];
-      }
-      } else {
-        array[index] = second[count];
-      }
-
-      if (count < second.length) {
-      if (second[count] < first[count]) {
-        array[index + 1] = first[count];
-      }
-      } else {
-        array[index] = first[count];
-      }
-      count++;
-      index++;
-
-    }
-    */
     return array;
   }
 }

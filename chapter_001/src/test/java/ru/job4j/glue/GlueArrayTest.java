@@ -81,4 +81,18 @@ public class GlueArrayTest {
     assertThat(resultArray, is(expectArray));
   }
 
+  /**
+  * Test - тестируем склеивание двух массивов, где встречаются одинаковые значения.
+  */
+
+  @Test
+  public void arrayGlueSix() {
+    int[] first = {1, 3, 5, 8, 9};
+    int[] second = {2, 4, 5, 8, 10};
+    GlueArray glueArray = new GlueArray();
+    int[] resultArray = glueArray.glue(first, second);
+    int[] expectArray = {1, 2, 3, 4, 5, 5, 8, 8, 9, 10};
+    assertThat(resultArray, is(expectArray));
+  }
+
 }
