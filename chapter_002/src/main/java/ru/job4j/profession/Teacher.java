@@ -10,6 +10,7 @@ public class Teacher extends Profession {
     }
 
     public Science teach(Pupil pupil) {
-        return null;
+        Science science = new Science("Physics");
+        return science;
     }
 }

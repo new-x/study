@@ -10,6 +10,7 @@ public class Doctor extends Profession {
     }
 
     public Diagnose heal(Pacient pacient) {
-        return null;
+        Diagnose diagnose = new Diagnose("Angina");
+        return diagnose;
     }
 }
