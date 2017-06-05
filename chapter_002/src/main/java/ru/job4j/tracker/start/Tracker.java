@@ -6,13 +6,14 @@ import java.util.*;
  * Created by Nastasia on 04.06.2017.
  */
 public class Tracker {
+
     private  Item[] items = new Item[10];
     private int position = 0;
     private static final Random RN = new Random();
 
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[position] = item;
+        this.items[position++] = item;
         return item;
     }
 
