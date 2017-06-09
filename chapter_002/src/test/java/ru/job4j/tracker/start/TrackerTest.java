@@ -86,6 +86,6 @@ public class TrackerTest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         tracker.add(itemThree);
-        assertThat(tracker.findByName("test3"), is(tracker.findByName(itemThree.getName())));
+        assertThat(tracker.findByName("test3")[0], is(itemThree));
     }
 }
