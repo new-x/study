@@ -12,6 +12,7 @@ public class StartUI {
     private Input input;
     private String name;
     private String desc;
+    private String id;
     private boolean quest = true;
     Tracker tracker = new Tracker();
 
@@ -31,8 +32,8 @@ public class StartUI {
         int num = Integer.parseInt(number);
         if (num < 7) {
             if (num == 0) {
-                this.name = input.ask("Enter a name please ");
-                this.desc = input.ask("Enter a desc please ");
+                this.name = input.ask("Enter a name please: ");
+                this.desc = input.ask("Enter a desc please: ");
                 tracker.add(new Task(this.name, this.desc));
             }
             if (num == 1) {
@@ -42,14 +43,24 @@ public class StartUI {
                             + "Описание: " + item.getDescription());
                 }
             }
+            if (num == 2) {
+
+            }
             if (num == 3) {
+                this.name = input.ask("Enter a name please: ");
+                this.desc = input.ask("Enter a desc please: ");
+                tracker.delete(new Task(this.name, this.desc));
+            }
+            if (num == 4) {
+                this.id = input.ask("Enter a id find item please: ");
+                System.out.println(tracker.findById(this.id));
             }
             if (num == 5) {
-                this.name = input.ask("Enter a name find item please ");
-                tracker.findByName(this.name);
+                this.name = input.ask("Enter a name find item please: ");
+                System.out.println(tracker.findByName(this.name));
             }
             if (num == 6) {
-                System.out.print("Close programm");
+                System.out.print("Close programm.");
                 this.quest = false;
             }
         }
