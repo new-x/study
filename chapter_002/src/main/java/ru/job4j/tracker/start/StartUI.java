@@ -13,6 +13,7 @@ public class StartUI {
     private String name;
     private String desc;
     private boolean quest = true;
+    Tracker tracker = new Tracker();
 
     public StartUI(Input input) {
         this.input = input;
@@ -20,7 +21,6 @@ public class StartUI {
 
     public void menu() {
         while(this.quest) {
-        Tracker tracker = new Tracker();
         String number = input.ask("0. Add new Item\n" +
                 "1. Show all items\n" +
                 "2. Edit item\n" +
@@ -37,8 +37,12 @@ public class StartUI {
             }
             if (num == 1) {
                 for (Item item : tracker.getAll()) {
-                    System.out.print(item.getName() + " " + item.getDescription());
+                    System.out.println("ID: " + item.getId() + " "
+                            + "Имя: " + item.getName() + " "
+                            + "Описание: " + item.getDescription());
                 }
+            }
+            if (num == 3) {
             }
             if (num == 5) {
                 this.name = input.ask("Enter a name find item please ");
