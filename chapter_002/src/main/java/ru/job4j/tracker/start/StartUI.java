@@ -27,7 +27,7 @@ public class StartUI {
                 "2. Edit item\n" +
                 "3. Delete item\n" +
                 "4. Find item by Id\n" +
-                "5. Find items by name\n" +
+                "5. Find items by Name\n" +
                 "6. Exit Program\n" + "Select: ");
         int num = Integer.parseInt(number);
         if (num < 7) {
@@ -44,20 +44,21 @@ public class StartUI {
                 }
             }
             if (num == 2) {
-
+            //Item itemEdit[] = tracker.update(tracker.findById(this.id));w
             }
             if (num == 3) {
-                this.name = input.ask("Enter a name please: ");
-                this.desc = input.ask("Enter a desc please: ");
-                tracker.delete(new Task(this.name, this.desc));
+                this.id = input.ask("Enter a ID please: ");
+                tracker.delete(tracker.findById(this.id));
             }
             if (num == 4) {
                 this.id = input.ask("Enter a id find item please: ");
-                System.out.println(tracker.findById(this.id));
+                Item itemId = tracker.findById(this.id);
+                System.out.println(itemId.getName() + " " + itemId.getDescription());
             }
             if (num == 5) {
                 this.name = input.ask("Enter a name find item please: ");
-                System.out.println(tracker.findByName(this.name));
+                Item itemName[] = tracker.findByName(this.name);
+                System.out.println(itemName[0].getName() + " " + itemName[0].getDescription());
             }
             if (num == 6) {
                 System.out.print("Close programm.");
@@ -68,14 +69,14 @@ public class StartUI {
 
     }
 
-    public void init() {
+    //public void init() {
         //ConsoleInput input = new ConsoleInput();
         //Tracker tracker = new Tracker();
 
         //for (Item item : tracker.getAll()) {
         //  System.out.print(item.getName() + " " + item.getDescription());
         //}
-    }
+    //}
 
     public static void main(String[] args) {
         //this.question = false;

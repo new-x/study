@@ -33,8 +33,8 @@ public class Tracker {
         for(int index = 0; index < this.position; index++) {
             if (this.items[index].getId().equals(item.getId())) {
                 System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
+                this.position = this.position - 1;
                 break;
-                //this.items[this.items.length - 1] = null;
             }
         }
     }
