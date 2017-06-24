@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * Class Tracker.
+ *
  * @author alekseev
  * @since 1.0
  */

@@ -5,7 +5,7 @@ package ru.job4j.tracker.start;
  */
 public class StartUITest {
     public static void main(String[] args) {
-        Input input = new StubInput(new String[] {"create task question"});
+        Input input = new StubInput(new String[]{"create task question"});
         new StartUI(input).menu();
     }
 }
