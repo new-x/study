@@ -15,7 +15,9 @@ public class StartUI {
     private String desc;
     private String id;
     private boolean quest = true;
+    private static final int EXIT = 6;
     Tracker tracker = new Tracker();
+
 
     public StartUI(Input input) {
         this.input = input;
@@ -39,13 +41,16 @@ public class StartUI {
                 }
                 if (num == 1) {
                     for (Item item : tracker.getAll()) {
-                        System.out.println("ID: " + item.getId() + " "
-                                + "Имя: " + item.getName() + " "
-                                + "Описание: " + item.getDescription());
+                        System.out.println("ID: " + item.getId() + " " + "Имя: " + item.getName() + " " + "Описание: " + item.getDescription());
                     }
                 }
                 if (num == 2) {
-                    //Item itemEdit[] = tracker.update(tracker.findById(this.id));
+                    this.id = input.ask("Enter a id update item please: ");
+                    this.name = input.ask("Enter a new name please: ");
+                    this.desc = input.ask("Enter a new desc please: ");
+                    Task itemNew = new Task(this.name, this.desc);
+                    itemNew.setId(this.id);
+                    tracker.update(itemNew);
                 }
                 if (num == 3) {
                     this.id = input.ask("Enter a ID please: ");
@@ -61,7 +66,7 @@ public class StartUI {
                     Item itemName[] = tracker.findByName(this.name);
                     System.out.println(itemName[0].getName() + " " + itemName[0].getDescription());
                 }
-                if (num == 6) {
+                if (num == EXIT) {
                     System.out.print("Close programm.");
                     this.quest = false;
                 }
