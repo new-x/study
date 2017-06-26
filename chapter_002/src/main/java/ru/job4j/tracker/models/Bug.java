@@ -1,7 +1,11 @@
 package ru.job4j.tracker.models;
 
 /**
- * Created by Nastasia on 04.06.2017.
+ * Class Bug.
+ *
+ * @author alekseev
+ * @since mm-dd-yyyy
  */
+
 public class Bug extends Item {
 }

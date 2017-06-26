@@ -1,11 +1,18 @@
 package ru.job4j.tracker.start;
 
 /**
- * Class Tracker.
+ * Class Input.
  *
  * @author alekseev
- * @since 1.0
+ * @since mm-dd-yyyy
  */
+
 public interface Input {
+    /**
+     * Method ask - принимает значение question, но ничего не возвращает.
+     *
+     * @param question - передаем задание.
+     * @return ничего не возвращаем.
+     */
     String ask(String question);
 }

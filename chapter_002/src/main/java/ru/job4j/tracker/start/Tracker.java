@@ -9,13 +9,15 @@ import java.util.Random;
  * Class Tracker.
  *
  * @author alekseev
- * @since 1.0
+ * @since mm-dd-yyyy
  */
 
 public class Tracker {
-
+    /** Иницилизация массива Item размером 10. */
     private Item[] items = new Item[10];
+    /** Позиция Item. */
     private int position = 0;
+    /** Генерация случайного числа. */
     private static final Random RN = new Random();
 
     /**
@@ -34,8 +36,8 @@ public class Tracker {
      * Метод delete  удаляет объект из массива и обрезает его.
      *
      * @param item - объект item.
-     * @return возвращаем item.
      */
+
     public void delete(Item item) {
         for (int index = 0; index < this.position; index++) {
             if (this.items[index].getId().equals(item.getId())) {
@@ -95,6 +97,11 @@ public class Tracker {
         }
         return result;
     }
+
+    /**
+     *
+     * @return возрвращаем сгенерированный ID с помощью метода Random.
+     */
 
     String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
