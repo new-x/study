@@ -10,11 +10,11 @@ package ru.job4j.tracker.start;
 
 public class StartUITest {
     /**
-     *
      * @param args передается в метод main.
      */
     public static void main(String[] args) {
+        Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"create task question"});
-        new StartUI(input).menu();
+        new StartUI(input, tracker).menu();
     }
 }

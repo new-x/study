@@ -27,7 +27,6 @@ public class StubInput implements Input {
     }
 
     /**
-     *
      * @param question - передаем задание.
      * @return ничего не возвращаем.
      */

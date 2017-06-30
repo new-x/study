@@ -67,8 +67,9 @@ public class StartUI {
     /**
      * @param input возращаем введенное значение с клавиатуры.
      */
-    public StartUI(Input input) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
+        this.tracker = tracker;
     }
 
     /**
@@ -135,7 +136,8 @@ public class StartUI {
     public static void main(String[] args) {
         //this.question = false;
         //new StartUI(new StubInput(new String[] {"Create stub task"})).init();
+        Tracker tracker = new Tracker();
         Input input = new ConsoleInput();
-        new StartUI(input).menu();
+        new StartUI(input, tracker).menu();
     }
 }
