@@ -66,6 +66,7 @@ public class StartUI {
 
     /**
      * @param input возращаем введенное значение с клавиатуры.
+     * @param tracker возвращаем данные трекера.
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;

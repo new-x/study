@@ -24,7 +24,7 @@ public class StubInputTest {
         new StartUI(input, tracker).menu();     //   создаём StartUI и вызываем метод menu()
         assertThat(tracker.getAll()[0].getName(), is("One")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
-    /** Тестируем класс StubInputTest - тестируем добавление Item и Update Item */
+    /** Тестируем класс StubInputTest - тестируем добавление Item и Update Item. */
     @Test
     public void testAddEdit() {
         Tracker tracker = new Tracker();
@@ -33,7 +33,7 @@ public class StubInputTest {
         new StartUI(input, tracker).menu();
         assertThat(tracker.findById(item.getId()).getName(), is("ReOne"));
     }
-    /** Тестируем класс StubInputTest - тестируем добавление Item и Delete Item */
+    /** Тестируем класс StubInputTest - тестируем добавление Item и Delete Item. */
     @Test
     public void testAddDelete() {
         Tracker tracker = new Tracker();
