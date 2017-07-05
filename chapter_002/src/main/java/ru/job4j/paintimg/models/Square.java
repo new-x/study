@@ -7,12 +7,22 @@ import ru.job4j.paintimg.start.Shape;
  * @since mm-dd-yyyy
  */
 public class Square implements Shape {
-    public String pic(Shape shape) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("++++++++");
-        sb.append("+      +");
-        sb.append("+      +");
-        sb.append("++++++++");
-        return sb.toString();
+    /**
+     * Create Square.
+     * @return string with Square.
+     */
+    public String pic() {
+        String separator = System.getProperty("line.separator");
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder resultStringBuilder = new StringBuilder();
+        for (int index = 0; index < 8; index++) {
+            stringBuilder.append("+");
+        }
+        stringBuilder.append(separator);
+        for (int index = 0; index < 8; index++) {
+            resultStringBuilder.append(stringBuilder);
+        }
+        resultStringBuilder.append(separator);
+        return resultStringBuilder.toString();
     }
 }

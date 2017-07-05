@@ -1,14 +1,16 @@
 package ru.job4j.paintimg.start;
 
-import ru.job4j.paintimg.models.Square;
-import ru.job4j.paintimg.models.Triangle;
-
 /**
  * @author alekseev
  * @since mm-dd-yyyy
  */
 public class Paint {
-    public void draw(Shape shape) {
-    System.out.print(shape);
+    /**
+     * Method draw img.
+     * @param shape - method shape accept object Triangle or Square.
+     */
+    public String draw(Shape shape) {
+        //System.out.print(shape.pic());
+        return shape.pic();
     }
 }
