@@ -1,8 +1,5 @@
 package ru.job4j.tracker.start;
 
-import ru.job4j.tracker.models.Item;
-import ru.job4j.tracker.models.Task;
-
 /**
  * Class Tracker.
  *
@@ -65,8 +62,8 @@ public class StartUI {
     private Tracker tracker = new Tracker();
 
     /**
-     * @param input возращаем введенное значение с клавиатуры.
-     * @param tracker возвращаем данные трекера.
+     * @param input   входно значение введенное значение с клавиатуры.
+     * @param tracker входное значение данные по заявке.
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -76,7 +73,7 @@ public class StartUI {
     /**
      * Меню программы.
      */
-    public void menu() {
+    /* public void menu() {
         while (this.quest) {
             String number = input.ask("0. Add new Item\n" + "1. Show all items\n" + "2. Edit item\n" + "3. Delete item\n" + "4. Find item by Id\n" + "5. Find items by Name\n" + "6. Exit Program\n" + "Select: ");
             int num = Integer.parseInt(number);
@@ -121,24 +118,18 @@ public class StartUI {
         }
 
     }
+    */
+    public void init() {
+        Tracker tracker = new Tracker();
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        do {
+            menu.show();
+        } while ("Y".equals(this.input.ask("Exit? Y")));
+    }
 
-    //public void init() {
-    //ConsoleInput input = new ConsoleInput();
-    //Tracker tracker = new Tracker();
-
-    //for (Item item : tracker.getAll()) {
-    //  System.out.print(item.getName() + " " + item.getDescription());
-    //}
-    //}
-
-    /**
-     * @param args возвращаем аргумент.
-     */
     public static void main(String[] args) {
-        //this.question = false;
-        //new StartUI(new StubInput(new String[] {"Create stub task"})).init();
         Tracker tracker = new Tracker();
         Input input = new ConsoleInput();
-        new StartUI(input, tracker).menu();
+        new StartUI(input, tracker).init();
     }
 }
