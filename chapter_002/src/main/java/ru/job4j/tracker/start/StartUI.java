@@ -120,11 +120,13 @@ public class StartUI {
     }
     */
     public void init() {
-        Tracker tracker = new Tracker();
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillActions();
         do {
             menu.show();
-        } while ("Y".equals(this.input.ask("Exit? Y")));
+            int key = Integer.valueOf(input.ask("Select: "));
+            menu.select(key);
+        } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package ru.job4j.tracker.start;
 
+import ru.job4j.tracker.models.Item;
 import ru.job4j.tracker.models.Task;
 
 
@@ -10,9 +11,18 @@ import ru.job4j.tracker.models.Task;
  * @since mm-dd-yyyy
  */
 public class MenuTracker {
+    /*
+    * Объект input - вводимое значение с консоли.
+    */
     private Input input;
+    /*
+    * Объект tracker - система заявок.
+    */
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[5];
+    /*
+    * Массив данных actions.
+     */
+    private UserAction[] actions = new UserAction[6];
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -21,6 +31,11 @@ public class MenuTracker {
 
     public void fillActions() {
         this.actions[0] = new AddItem();
+        this.actions[1] = new ShowItem();
+        this.actions[2] = new EditItem();
+        this.actions[3] = new DeleteItem();
+        this.actions[4] = new FindById();
+        this.actions[5] = new FindByName();
     }
 
     public void select(int key) {
@@ -29,7 +44,9 @@ public class MenuTracker {
 
     public void show() {
         for (UserAction action : this.actions) {
-            System.out.println(action.info());
+            if (action != null) {
+                System.out.println(action.info());
+            }
         }
 
     }
@@ -40,13 +57,95 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            String name = input.ask("Please eneter a new task name: ");
-            String desc = input.ask("Please eneter a new desc name: ");
+            String name = input.ask("Please eneter a task name: ");
+            String desc = input.ask("Please eneter a desc name: ");
             tracker.add(new Task(name, desc));
         }
 
         public String info() {
             return String.format("%s. %s", this.key(), "Add the new Item");
         }
+    }
+
+    private static class ShowItem implements UserAction {
+        public int key() {
+            return 1;
+        }
+
+        public void execute(Input input, Tracker tracker) {
+            for (Item item : tracker.getAll()) {
+                System.out.println(String.format("%s %s %s", item.getId(), item.getName(), item.getDescription()));
+            }
+        }
+
+        public String info() {
+            return String.format("%s. %s", this.key(), "Show all items: ");
+        }
+    }
+
+    private static class FindById implements UserAction {
+        public int key() {
+            return 4;
+        }
+
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter item ID: ");
+            System.out.println(String.format("%s %s %s", tracker.findById(id).getId(), tracker.findById(id).getName(), tracker.findById(id).getDescription()));
+        }
+
+        public String info() {
+            return String.format("%s. %s", this.key(), "Find Item by ID: ");
+        }
+    }
+
+    private class FindByName implements UserAction {
+        public int key() {
+            return 5;
+        }
+
+        public void execute(Input input, Tracker tracker) {
+            String name = input.ask("Please eneter a task name: ");
+            Item[] itemName = tracker.findByName(name);
+            //System.out.println(tracker.findByName(name));
+            System.out.println(String.format("%s %s %s", itemName[0].getId(), itemName[0].getName(), itemName[0].getDescription()));
+        }
+
+        public String info() {
+            return String.format("%s. %s", this.key(), "Find Item by name: ");
+        }
+    }
+}
+
+class EditItem implements UserAction {
+    public int key() {
+        return 2;
+    }
+
+    public void execute(Input input, Tracker tracker) {
+        String id = input.ask("Please eneter a item ID: ");
+        String name = input.ask("Please eneter a new task name: ");
+        String desc = input.ask("Please eneter a new desc name: ");
+        Task task = new Task(name, desc);
+        task.setId(id);
+        tracker.update(task);
+    }
+
+    public String info() {
+        return String.format("%s. %s", this.key(), "Edit Item");
+    }
+}
+
+class DeleteItem implements UserAction {
+    public int key() {
+        return 3;
+    }
+
+    public void execute(Input input, Tracker tracker) {
+        String id = input.ask("Please enter a item ID: ");
+        tracker.delete(tracker.findById(id));
+    }
+
+    public String info() {
+        return String.format("%s. %s", this.key(), "Delete Item");
     }
 }

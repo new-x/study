@@ -15,6 +15,6 @@ public class StartUITest {
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"create task question"});
-        new StartUI(input, tracker).menu();
+        new StartUI(input, tracker).init();
     }
 }
