@@ -15,4 +15,6 @@ public interface Input {
      * @return ничего не возвращаем.
      */
     String ask(String question);
+
+    int ask(String question, int[] range);
 }

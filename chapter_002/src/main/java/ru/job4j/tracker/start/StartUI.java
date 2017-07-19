@@ -8,6 +8,7 @@ package ru.job4j.tracker.start;
  */
 
 public class StartUI {
+    private int[] ranges = new int[] {0, 1, 2, 3, 4, 5};
     /**
      * Входящее значение.
      */
@@ -124,14 +125,14 @@ public class StartUI {
         menu.fillActions();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            menu.select(key);
+            //int key = Integer.valueOf(input.ask("Select: "));
+            menu.select(input.ask("Select: ", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUI(input, tracker).init();
     }
 }
