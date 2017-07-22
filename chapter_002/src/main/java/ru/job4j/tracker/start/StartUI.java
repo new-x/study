@@ -123,6 +123,23 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
+        UserAction deleteAction = new UserAction() {
+            @Override
+            public int key() {
+                return 3;
+            }
+
+            @Override
+            public void execute(Input input, Tracker tracker) {
+
+            }
+
+            @Override
+            public String info() {
+                return "3. Delete";
+            }
+        };
+        menu.addActions(deleteAction);
         do {
             menu.show();
             //int key = Integer.valueOf(input.ask("Select: "));

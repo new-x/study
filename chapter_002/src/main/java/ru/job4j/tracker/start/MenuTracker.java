@@ -22,7 +22,9 @@ public class MenuTracker {
     /*
     * Массив данных actions.
      */
-    private UserAction[] actions = new UserAction[6];
+    private UserAction[] actions = new UserAction[7];
+
+    private int position = 0;
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -30,12 +32,17 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowItem();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindById();
-        this.actions[5] = new FindByName();
+        this.actions[position++] = new AddItem();
+        this.actions[position++] = new ShowItem();
+        this.actions[position++] = new EditItem();
+        this.actions[position++] = new DeleteItem();
+        this.actions[position++] = new FindById();
+        this.actions[position++] = new FindByName();
+    }
+
+    public void addActions(UserAction action) {
+        this.actions[position++] = action;
+
     }
 
     public void select(int key) {
