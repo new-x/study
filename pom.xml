@@ -16,6 +16,7 @@
         <module>chapter_001</module>
         <module>chapter_002</module>
 		<module>chessboard</module>
+        <module>testquest</module>
     </modules>
     
     <dependencies>
