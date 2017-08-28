@@ -17,4 +17,3 @@ public class ConvertTest {
         assertThat(expected, is(tmp));
     }
 }
-w
