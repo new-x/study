@@ -23,7 +23,11 @@ public class Converter {
         for (int indexRows = 0; indexRows < rows; indexRows++){
             for (int indexLine = 0; indexLine < size/rows + size%rows; indexLine++){
                 if (index < size) {
-                    array[indexRows][indexLine] = list.get(index);
+                    if(list.get(index) != null){
+                        array[indexRows][indexLine] = list.get(index);
+                    } else {
+                        array[indexRows][indexLine] = 0;
+                    }
                 }else {
                     array[indexRows][indexLine] = 0;
                 }
