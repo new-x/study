@@ -14,14 +14,12 @@ public class User {
         this.city = city;
     }
 
-    public User(String name){
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 }
