@@ -16,7 +16,7 @@ public class TestSortUser {
                 Arrays.asList(
                         new User("Марина", 10),
                         new User ("Петр", 8),
-                        new User("Максим", 6),
+                        new User("Максим", 8),
                         new User("Даша", 4)
                 )
         );
