@@ -13,6 +13,10 @@ public class User implements Comparable<User> {
         return name;
     }
 
+    public Integer getNameLenght() {
+        return name.length();
+    }
+
     public Integer getAge() {
         return age;
     }
