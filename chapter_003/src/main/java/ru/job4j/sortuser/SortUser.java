@@ -24,19 +24,24 @@ public class SortUser {
     }
 
     public List<User> sortByAllFields (List<User> user){
-        user.sort(
+        /*user.sort(
                 new Comparator<User>() {
                     @Override
                     public int compare(User o1, User o2) {
                         return o1.getName().compareTo(o2.getName());
                     }
                 }
-        );
+        );*/
         user.sort(
                 new Comparator<User>() {
                     @Override
                     public int compare(User o1, User o2) {
-                        return o1.getAge().compareTo(o2.getAge());
+                        if(o1.getNameLenght() == o2.getNameLenght()){
+                            return o1.getAge().compareTo(o2.getAge());
+                        } else {
+                            return o1.getNameLenght().compareTo(o2.getNameLenght());
+                        }
+                        //return o1.getAge().compareTo(o2.getAge());
                     }
                 }
         );
