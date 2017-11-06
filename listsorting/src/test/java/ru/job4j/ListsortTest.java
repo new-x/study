@@ -11,18 +11,13 @@ import static org.junit.Assert.assertThat;
 public class ListsortTest {
     @Test
     public void sortList() {
+        Set<List<String>> data = new TreeSet<>();
+        data.add(Arrays.asList( ("1 2 3")));
+        data.add(Arrays.asList( ("2 2 3")));
+        data.add(Arrays.asList( ("3 2 3")));
         Listsort sortlist = new Listsort();
-        Set<List<Listdata>> listSortSet = new HashSet<>();
-        List<Listdata> listSort = new ArrayList<>();
-        listSort.add(new Listdata("1", "2", "3"))
-        listSort.addAll(
-                Arrays.asList(
-                        new Listdata("1", "2", "3"),
-                        new Listdata("2", "2", "3"),
-                        new Listdata("3", "2", "3")
-        ));
-        listSortSet.add(listSort);
-        Set<List<Listdata>> result = sortlist.listSorting(listSortSet);
+
+        Set<List<String>> result = sortlist.sortList(data);
         assertThat(result, is(-1));
     }
 
