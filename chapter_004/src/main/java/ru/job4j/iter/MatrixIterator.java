@@ -5,7 +5,8 @@ import java.util.Iterator;
 
 public class MatrixIterator implements Iterator {
     private int[][] array;
-    private int index = 0;
+    private int indexOne = 0;
+    private int indexTwo = 0;
 
     public MatrixIterator(int[][] array){
         this.array = array;
@@ -14,18 +15,25 @@ public class MatrixIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return array.length > index;
+        if (array.length > indexOne) {
+            if(array[indexOne].length > indexTwo){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public Object next() {
-        for(int arr[] : array){
-            for(int arrtwo : arr){
-                if(arrtwo != 0){
-                    return index++;
-                }
+        if (array[indexOne].length > indexTwo){
+            indexTwo++;
+            if(array[indexOne].length == indexTwo){
+                int index = indexTwo - 1;
+                indexTwo = 0;
+                return array[indexOne++][index];
             }
+            return array[indexOne][indexTwo - 1];
         }
-      return 0;
+        return array[indexOne][indexTwo++];
     }
 }
