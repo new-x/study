@@ -18,25 +18,25 @@ public class JaggedArrayIteratorTest {
         it = new MatrixIterator(new int[][]{{1}, {3, 4}});
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation () {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(3));
         assertThat(it.next(), is(4));
-      //  it.next();
+        it.next();
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void sequentialHasNextInvocationDoesntAffectRetrievalOrder () {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(3));
         assertThat(it.next(), is(4));
-//        it.next();
+        it.next();
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void hasNextNextSequentialInvocation () {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
@@ -45,6 +45,6 @@ public class JaggedArrayIteratorTest {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(4));
         assertThat(it.hasNext(), is(false));
-     //   it.next();
+        it.next();
     }
 }
