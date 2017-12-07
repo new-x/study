@@ -25,7 +25,7 @@ public class EvenIterator implements Iterator {
     public Object next() {
         if (array.length > index) {
             for (; index < array.length; index++) {
-                if (array[index] % 2 == 0) {
+                if (hasNext()) {
                     return array[index++];
                 }
             }

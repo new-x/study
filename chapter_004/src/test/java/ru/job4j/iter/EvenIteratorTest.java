@@ -29,7 +29,7 @@ public class EvenIteratorTest {
         assertThat(it.next(), is(6));
         assertThat(it.hasNext(), is(false));
         it.next();
-        it.next();
+        //it.next();
     }
 
     @Test
