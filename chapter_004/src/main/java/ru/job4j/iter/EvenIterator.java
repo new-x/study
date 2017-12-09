@@ -15,6 +15,7 @@ public class EvenIterator implements Iterator {
     public boolean hasNext() {
         for (int indexCheck = index; indexCheck < array.length; indexCheck++) {
             if (array[indexCheck] % 2 == 0) {
+                index = indexCheck;
                 return true;
             }
         }
@@ -24,13 +25,14 @@ public class EvenIterator implements Iterator {
     @Override
     public Object next() {
         if (array.length > index) {
-            for (; index < array.length; index++) {
+            for (; array.length > index; index++) {
                 if (hasNext()) {
                     return array[index++];
                 }
+                else {
+                    throw new NoSuchElementException("Not found element.");
+                }
             }
-        } else {
-            throw new NoSuchElementException("Not found element.");
         }
         return null;
     }
