@@ -23,7 +23,7 @@ public class Converter {
 
             @Override
             public Integer next() {
-                if (!this.hasNext()) {
+                if (this.hasNext()) {
                     return this.active.next();
                 } else {
                     throw new NoSuchElementException("Not found element");
