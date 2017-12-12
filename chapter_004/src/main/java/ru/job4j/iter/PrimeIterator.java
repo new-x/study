@@ -25,9 +25,11 @@ public class PrimeIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        for (int checkIndex = index; checkIndex < array.length; checkIndex++) {
-            if (primeNumber(array[checkIndex]) == true) {
+        while (index < array.length) {
+            if (primeNumber(array[index]) == true) {
                 return true;
+            } else {
+                index++;
             }
         }
         return false;
@@ -35,15 +37,11 @@ public class PrimeIterator implements Iterator {
 
     @Override
     public Object next() {
-        if (array.length > index) {
-            for (; index < array.length; index++) {
-                if (primeNumber(array[index]) == true) {
-                    return array[index++];
-                }
-            }
-        } else {
+        if (hasNext()){
+            return array[index++];
+        }
+        else {
             throw new NoSuchElementException("Not found element.");
         }
-            return null;
     }
 }
