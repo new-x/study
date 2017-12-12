@@ -13,17 +13,33 @@ public class EvenIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        for (int indexCheck = index; indexCheck < array.length; indexCheck++) {
+        while (index < this.array.length) {
+            if (this.array[index] % 2 == 0) {
+                return true;
+            } else {
+                index++;
+            }
+        }
+        return false;
+        /*for (int indexCheck = index; indexCheck < array.length; indexCheck++) {
             if (array[indexCheck] % 2 == 0) {
                 index = indexCheck;
                 return true;
             }
         }
         return false;
+        */
     }
 
     @Override
     public Object next() {
+        if (hasNext()) {
+            return this.array[index++];
+        } else {
+            throw new NoSuchElementException("Not found element.");
+        }
+
+/*
         if (array.length > index) {
             for (; array.length > index; index++) {
                 if (hasNext()) {
@@ -35,5 +51,6 @@ public class EvenIterator implements Iterator {
             }
         }
         return null;
+        */
     }
 }
