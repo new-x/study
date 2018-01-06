@@ -22,10 +22,18 @@ public class SimpleSet<E> implements SimpleContainer<E> {
 
     @Override
     public boolean check(E e) {
-        for (int index = 0; index < position; index++) {
-            return this.object[index].equals(e) ? true : false;
+        for (int index = 0; index < this.object.length; index++) {
+            if(this.object[index] != null) {
+                if (this.object[index].equals(e)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
 
