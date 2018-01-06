@@ -14,6 +14,7 @@ public class SimpleSetTest {
         ss.add("Маша");
         ss.add("Даша");
         ss.add("Паша");
+        assertThat(ss.check("Даша"), is(true));
         assertThat(ss.iterator().hasNext(), is(true));
         assertThat(ss.iterator().next(), is("Маша"));
         assertThat(ss.iterator().hasNext(), is(true));

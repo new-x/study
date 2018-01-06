@@ -26,14 +26,10 @@ public class SimpleSet<E> implements SimpleContainer<E> {
             if(this.object[index] != null) {
                 if (this.object[index].equals(e)) {
                     return true;
-                } else {
-                    return false;
                 }
-            } else {
-                return false;
             }
         }
-        return true;
+        return false;
     }
 
 
