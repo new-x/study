@@ -22,13 +22,13 @@ public class Container<E> implements SimpleContainer<E> {
                 this.objects[position++] = e;
             } else {
                 this.objects = Arrays.copyOf(this.objects, position + 3);
-                modCount--;
-                this.objects[position++] = e;
+                if (--modCount > 0) {
+                    this.objects[position++] = e;
+                } else {
+                    throw new ConcurrentModificationException("Mod count exception.");
+                }
             }
-        } else {
-            throw new ConcurrentModificationException("Mod count exception.");
         }
-
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Container<E> implements SimpleContainer<E> {
                 if (array[index] != null) {
                     return true;
                 }
-                    return false;
+                return false;
             }
 
             @Override

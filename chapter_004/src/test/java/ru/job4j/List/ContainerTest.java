@@ -34,7 +34,5 @@ public class ContainerTest {
         container.add("Даша");
         container.add("Саша");
         container.add("Паша");
-        container.add("Паша");
-
     }
 }
