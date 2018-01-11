@@ -24,8 +24,6 @@ public class Container<E> implements SimpleContainer<E> {
                 this.objects = Arrays.copyOf(this.objects, position + 3);
                 if (--modCount > 0) {
                     this.objects[position++] = e;
-                } else {
-                    throw new ConcurrentModificationException("Mod count exception.");
                 }
             }
         }

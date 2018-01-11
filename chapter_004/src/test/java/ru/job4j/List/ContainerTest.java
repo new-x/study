@@ -34,5 +34,6 @@ public class ContainerTest {
         container.add("Даша");
         container.add("Саша");
         container.add("Паша");
+        assertThat(container.iterator().next(), is("Маша"));
     }
 }
