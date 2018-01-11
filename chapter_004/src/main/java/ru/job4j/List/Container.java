@@ -42,6 +42,7 @@ public class Container<E> implements SimpleContainer<E> {
     @Override
     public Iterator<E> iterator() {
         Object[] array = this.objects;
+        int state = modCount;
         return new Iterator<E>() {
             @Override
             public boolean hasNext() {
@@ -53,8 +54,12 @@ public class Container<E> implements SimpleContainer<E> {
 
             @Override
             public E next() {
-                if (hasNext()) {
-                    return (E) array[index++];
+                if (modCount != 0) {
+                    if (hasNext()) {
+                        return (E) array[index++];
+                    }
+                } else {
+                    throw new ConcurrentModificationException("Mod count exception.");
                 }
                 return null;
             }
