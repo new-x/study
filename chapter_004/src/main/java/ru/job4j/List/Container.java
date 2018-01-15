@@ -11,7 +11,6 @@ public class Container<E> implements SimpleContainer<E> {
 
     @Override
     public void add(E e) {
-        if (position < this.objects.length) {
             if (this.objects.length > position) {
                 this.objects[position++] = e;
                 modCount++;
@@ -20,7 +19,6 @@ public class Container<E> implements SimpleContainer<E> {
                 this.objects[position++] = e;
                 modCount++;
             }
-        }
     }
 
     @Override
@@ -47,7 +45,7 @@ public class Container<E> implements SimpleContainer<E> {
 
             @Override
             public E next() {
-                if (modCount != 0) {
+                if (state == modCount) {
                     if (hasNext()) {
                         return (E) array[index++];
                     }

@@ -3,6 +3,7 @@ package ru.job4j.List;
 import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -16,24 +17,24 @@ public class ContainerTest {
         container.add("Даша");
         container.add("Саша");
         container.add("Паша");
-        assertThat(container.iterator().hasNext(), is(true));
-        assertThat(container.iterator().next(), is("Маша"));
-        assertThat(container.iterator().hasNext(), is(true));
-        assertThat(container.iterator().next(), is("Даша"));
-        assertThat(container.iterator().hasNext(), is(true));
-        assertThat(container.iterator().next(), is("Саша"));
-        assertThat(container.iterator().hasNext(), is(true));
-        assertThat(container.iterator().next(), is("Паша"));
-        assertThat(container.iterator().hasNext(), is(false));
+        Iterator it = container.iterator();
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Маша"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Даша"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Саша"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Паша"));
     }
 
     @Test (expected = ConcurrentModificationException.class)
     public void whenModCountException(){
         Container<String> container = new Container<String>();
         container.add("Маша");
-        container.add("Даша");
-        container.add("Саша");
-        container.add("Паша");
-        assertThat(container.iterator().next(), is("Маша"));
+        Iterator it = container.iterator();
+        it.next();
+        container.add("Макс");
+        assertThat(it.next(), is("Макс"));
     }
 }
