@@ -11,7 +11,7 @@ public class ContainerTest {
 
     @Test
     public void whenAddItemIsCompete() {
-        Container<String> container = new Container<String>(3, 2);
+        Container<String> container = new Container<String>();
         container.add("Маша");
         container.add("Даша");
         container.add("Саша");
@@ -29,7 +29,7 @@ public class ContainerTest {
 
     @Test (expected = ConcurrentModificationException.class)
     public void whenModCountException(){
-        Container<String> container = new Container<String>(3, 1);
+        Container<String> container = new Container<String>();
         container.add("Маша");
         container.add("Даша");
         container.add("Саша");

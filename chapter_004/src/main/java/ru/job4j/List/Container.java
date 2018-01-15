@@ -5,26 +5,20 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 public class Container<E> implements SimpleContainer<E> {
-    private int modCount;
-    private Object[] objects;
+    private int modCount = 0;
+    private Object[] objects = new Object[1];
     private int position = 0;
-    private int index = 0;
-
-    public Container(int size, int modCount) {
-        this.objects = new Object[size];
-        this.modCount = modCount;
-    }
 
     @Override
     public void add(E e) {
-        if (modCount > 0) {
+        if (position < this.objects.length) {
             if (this.objects.length > position) {
                 this.objects[position++] = e;
+                modCount++;
             } else {
                 this.objects = Arrays.copyOf(this.objects, position + 3);
-                if (--modCount > 0) {
-                    this.objects[position++] = e;
-                }
+                this.objects[position++] = e;
+                modCount++;
             }
         }
     }
@@ -42,6 +36,7 @@ public class Container<E> implements SimpleContainer<E> {
         Object[] array = this.objects;
         int state = modCount;
         return new Iterator<E>() {
+            int index = 0;
             @Override
             public boolean hasNext() {
                 if (array[index] != null) {
