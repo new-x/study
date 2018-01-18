@@ -39,4 +39,21 @@ public class NodeListTest {
         assertThat(it.hasNext(), is(true));
     }
 
+    @Test
+    public void whenRemoveComplete(){
+        NodeList<String> list = new NodeList();
+        list.add("Один");
+        list.add("Два");
+        list.add("Три");
+        list.add("Четыре");
+        list.remove(3);
+        Iterator it = list.iterator();
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Один"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Два"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Три"));
+    }
+
 }
