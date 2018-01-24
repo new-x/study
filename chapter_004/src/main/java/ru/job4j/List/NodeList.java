@@ -17,7 +17,7 @@ public class NodeList<E> implements SimpleContainer<E> {
         }
         Node<E> findElement = this.first;
         for (int i = 0; i < index; i++) {
-            findElement = findElement.getNext();
+            findElement = findElement.next;
         }
         return findElement;
     }
@@ -33,8 +33,8 @@ public class NodeList<E> implements SimpleContainer<E> {
             this.previous = this.first;
         } else {
             this.current = new Node(this.previous, e);
-            this.previous.setNext(this.current);
-            this.first.setPrevious(this.current);
+            this.previous.next = this.current;
+            this.first.previous = this.current;
             this.previous = this.current;
 
         }
@@ -46,24 +46,24 @@ public class NodeList<E> implements SimpleContainer<E> {
     public E remove(int index) {
         Node<E> element = getNode(index);
         if (index == 0) {
-            element.getNext().setPrevious(this.first.getPrevious());
-            this.first = element.getNext();
+            element.next.previous = this.first.previous;
+            this.first = element.next;
         }
         if (index == length -1) {
-            this.first.setPrevious(element.getPrevious());
-            element.getPrevious().setNext(this.first);
+            this.first.previous = element.previous;
+            element.previous.next = this.first;
         } else {
-            element.getNext().setPrevious(element.getPrevious());
-            element.getPrevious().setNext(element.getNext());
+            element.next.previous = element.previous;
+            element.previous.next = element.next;
         }
         modCount++;
         length--;
-        return (E) element.getElement();
+        return (E) element.element;
     }
 
     @Override
     public E get(int index) {
-        return (E) getNode(index).getElement();
+        return (E) getNode(index).element;
     }
 
     @Override
@@ -93,13 +93,13 @@ public class NodeList<E> implements SimpleContainer<E> {
                     throw new NoSuchElementException();
                 }
                 if (index == 0) {
-                    nextElement = element.getNext();
+                    nextElement = element.next;
                 } else {
                     element = nextElement;
-                    nextElement = nextElement.getNext();
+                    nextElement = nextElement.next;
                 }
                 index++;
-                return (E) element.getElement();
+                return (E) element.element;
             }
         };
     }
