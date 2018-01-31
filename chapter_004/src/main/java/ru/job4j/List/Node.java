@@ -5,12 +5,12 @@ public class Node<E> {
     Node<E> next;
     Node<E> previous;
 
-    public Node(Node<E> previous, E current) {
-        this.element = current;
+    public Node(Node<E> previous, E element) {
+        this.element = element;
         this.previous = previous;
     }
 
-    public Node(E current){
-        this.element = current;
+    public Node(E element) {
+        this.element = element;
     }
 }
