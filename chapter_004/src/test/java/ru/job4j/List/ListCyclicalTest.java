@@ -19,7 +19,7 @@ public class ListCyclicalTest {
         three.next = four;
         four.next = five;
         five.next = one;
-        assertThat(ls.hasCycle(one, 5), is(true));
+        assertThat(ls.hasCycle(one), is(true));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ListCyclicalTest {
         five.next = three;
         six.next = seven;
         seven.next = eight;
-        assertThat(ls.hasCycle(one, 8), is(true));
+        assertThat(ls.hasCycle(one), is(true));
     }
 
 }
