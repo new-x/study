@@ -6,19 +6,22 @@ public class ListCyclical<E> {
         Node<E> nextElement = one.next;
         int indexStep = 1;
         boolean result = true;
-        do {
-            for (int i = 0; i < indexStep; i++) {
-                if (element.element.equals(nextElement.element)) {
-                    return true;
-                } else {
-                    element = element.next;
+        while (result) {
+            try {
+                for (int i = 0; i < indexStep; i++) {
+                    if (element.element.equals(nextElement.element)) {
+                        return true;
+                    } else {
+                        element = element.next;
+                    }
                 }
+                element = one;
+                nextElement = nextElement.next;
+                indexStep++;
+            } catch (NullPointerException e) {
+                result = false;
             }
-            element = one;
-            nextElement = nextElement.next;
-            indexStep++;
-        } while (result);
-
+        }
         return false;
     }
 }
