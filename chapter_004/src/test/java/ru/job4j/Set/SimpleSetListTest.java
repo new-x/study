@@ -2,6 +2,7 @@ package ru.job4j.Set;
 
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,17 +15,18 @@ public class SimpleSetListTest {
 
     @Test (expected = IndexOutOfBoundsException.class)
     public void whenAddAllElementsComplete() {
-        List<String> elements = new LinkedList<String>();
-        SimpleSetList ssl = new SimpleSetList(elements);
-        ssl.add("Маша");
-        ssl.add("Настя");
-        ssl.add("Даша");
-        assertThat(ssl.iterator().hasNext(), is(true));
-        assertThat(ssl.iterator().next(), is("Маша"));
-        assertThat(ssl.iterator().hasNext(), is(true));
-        assertThat(ssl.iterator().next(), is("Настя"));
-        assertThat(ssl.iterator().hasNext(), is(true));
-        assertThat(ssl.iterator().next(), is("Даша"));
-        assertThat(ssl.iterator().hasNext(), is(false));
+        SimpleSetList<String> ssl = new SimpleSetList<>();
+        ssl.add("Антон");
+        ssl.add("Марина");
+        ssl.add("Антон");
+        ssl.add("Денис");
+        Iterator it = ssl.iterator();
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Антон"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Марина"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Денис"));
+        it.next();
     }
 }

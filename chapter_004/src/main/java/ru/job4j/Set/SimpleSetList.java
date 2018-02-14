@@ -1,40 +1,39 @@
 package ru.job4j.Set;
 
+import ru.job4j.List.NodeList;
+
 import java.util.Iterator;
-import java.util.List;
 
 public class SimpleSetList<E> implements SimpleContainer<E> {
-    List<E> elements;
-    private int index = 0;
-
-    public SimpleSetList(List elements) {
-        this.elements = elements;
-    }
+    NodeList<E> elements = new NodeList<>();
 
     @Override
     public void add(E e) {
-        if (!check(e)) {
+        if (check(e)) {
             elements.add(e);
         }
     }
 
     @Override
     public boolean check(E e) {
-        for (E element : elements) {
-            if (element.equals(e)) {
-                return true;
+        for (int index = 0; index < elements.size(); index++) {
+            if (elements.get(index).equals(e)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
+
 
     @Override
     public Iterator<E> iterator() {
-        List<E> element = elements;
+        NodeList<E> element = elements;
         return new Iterator<E>() {
+            int index = 0;
+
             @Override
             public boolean hasNext() {
-                if (element.size() > index){
+                if (element.size() > index) {
                     return element.get(index) != null ? true : false;
                 } else {
                     throw new IndexOutOfBoundsException();
@@ -44,7 +43,7 @@ public class SimpleSetList<E> implements SimpleContainer<E> {
 
             @Override
             public E next() {
-                if (hasNext()){
+                if (hasNext()) {
                     return (E) element.get(index++);
                 }
                 return null;
