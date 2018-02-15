@@ -9,7 +9,7 @@ public class ListCyclical<E> {
         while (result) {
             try {
                 for (int i = 0; i < indexStep; i++) {
-                    if (element.element.equals(nextElement.element)) {
+                    if (element == nextElement) {
                         return true;
                     } else {
                         element = element.next;
