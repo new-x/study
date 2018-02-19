@@ -55,5 +55,15 @@ public class NodeListTest {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is("Три"));
     }
+    @Test
+    public void whenIsDublicate() {
+        NodeList<String> list = new NodeList();
+        list.add("Один");
+        list.add("Два");
+        list.add("Три");
+        list.add("Четыре");
+        list.add("Один");
+        assertThat(list.hasDuplicate("Один"), is(true));
+    }
 
 }

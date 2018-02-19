@@ -49,7 +49,7 @@ public class NodeList<E> implements SimpleContainer<E> {
             element.next.previous = this.first.previous;
             this.first = element.next;
         }
-        if (index == length -1) {
+        if (index == length - 1) {
             this.first.previous = element.previous;
             element.previous.next = this.first;
         } else {
@@ -64,6 +64,16 @@ public class NodeList<E> implements SimpleContainer<E> {
     @Override
     public E get(int index) {
         return (E) getNode(index).element;
+    }
+
+    @Override
+    public boolean hasDuplicate(E e) {
+        for (int index = 0; index < length; index++) {
+            if (this.get(index).equals(e)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
