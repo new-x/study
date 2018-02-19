@@ -2,6 +2,8 @@ package ru.job4j.Set;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -10,17 +12,18 @@ import static org.junit.Assert.assertThat;
 public class SimpleSetTest {
     @Test
     public void whenAddNoRepetition(){
-        SimpleSet<String> ss = new SimpleSet<String>(3);
+        SimpleSet<String> ss = new SimpleSet<String>();
         ss.add("Маша");
         ss.add("Даша");
         ss.add("Паша");
-        assertThat(ss.check("Даша"), is(true));
-        assertThat(ss.iterator().hasNext(), is(true));
-        assertThat(ss.iterator().next(), is("Маша"));
-        assertThat(ss.iterator().hasNext(), is(true));
-        assertThat(ss.iterator().next(), is("Даша"));
-        assertThat(ss.iterator().hasNext(), is(true));
-        assertThat(ss.iterator().next(), is("Паша"));
-        assertThat(ss.iterator().hasNext(), is(false));
+        Iterator it = ss.container.iterator();
+        assertThat(ss.container.hasDuplicate("Даша"), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Маша"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Даша"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Паша"));
+        assertThat(it.hasNext(), is(false));
     }
 }

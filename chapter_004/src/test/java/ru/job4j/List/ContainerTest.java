@@ -28,13 +28,23 @@ public class ContainerTest {
         assertThat(it.next(), is("Паша"));
     }
 
-    @Test (expected = ConcurrentModificationException.class)
-    public void whenModCountException(){
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenModCountException() {
         Container<String> container = new Container<String>();
         container.add("Маша");
         Iterator it = container.iterator();
         it.next();
         container.add("Макс");
         assertThat(it.next(), is("Макс"));
+    }
+
+    @Test
+    public void whenIsDublicate() {
+        Container<String> container = new Container<String>();
+        container.add("Маша");
+        container.add("Даша");
+        container.add("Саша");
+        boolean result = container.hasDuplicate("Саша");
+        assertThat(result, is(true));
     }
 }
