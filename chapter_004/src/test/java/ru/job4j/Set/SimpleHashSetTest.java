@@ -10,29 +10,26 @@ import static org.junit.Assert.assertThat;
 
 public class SimpleHashSetTest {
     @Test
-    public void whenAddTrue() {
+    public void whenCheckAddElements() {
         SimpleHashSet<String> shs = new SimpleHashSet<String>();
-        shs.add("Маша");
-        shs.add("Даша");
-        shs.add("Паша");
-        shs.add("Настя");
-        shs.add("Кирилл");
-        assertThat(shs.contains("Маша"), is(true));
-        assertThat(shs.contains("Даша"), is(true));
-        assertThat(shs.contains("Паша"), is(true));
-        assertThat(shs.contains("Настя"), is(true));
+        shs.add("One");
+        shs.add("Two");
+        shs.add("Three");
+        shs.add("Four");
+        assertThat(shs.contains("Two"), is(true));
+        assertThat(shs.contains("Three"), is(true));
+        assertThat(shs.contains("Four"), is(true));
     }
 
     @Test
-    public void whenRemoveTrue() {
+    public void whenRemoveAddElements() {
         SimpleHashSet<String> shs = new SimpleHashSet<String>();
-        shs.add("Маша");
-        shs.add("Даша");
-        shs.add("Паша");
-        shs.add("Настя");
-        shs.add("Кирилл");
-        shs.remove("Паша");
-        assertThat(shs.contains("Паша"), is(true));
+        shs.add("One");
+        shs.add("Two");
+        shs.add("Three");
+        shs.add("Four");
+        shs.remove("Two");
+        assertThat(shs.contains("Two"), is(false));
     }
 
 }
