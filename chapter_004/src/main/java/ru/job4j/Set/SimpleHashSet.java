@@ -6,7 +6,7 @@ public class SimpleHashSet<E> {
 
     public void add(E e) {
         if (!contains(e)) {
-            if (objects[getKey(e)] != null) {
+            if (getKey(e) >= objects.length) {
                 changeArraySize();
             }
             this.objects[getKey(e)] = e;

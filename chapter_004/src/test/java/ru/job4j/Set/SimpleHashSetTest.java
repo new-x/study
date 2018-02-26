@@ -16,7 +16,8 @@ public class SimpleHashSetTest {
         shs.add("Two");
         shs.add("Three");
         shs.add("Four");
-        assertThat(shs.contains("Two"), is(true));
+        shs.changeArraySize();
+        assertThat(shs.contains("One"), is(true));
         assertThat(shs.contains("Three"), is(true));
         assertThat(shs.contains("Four"), is(true));
     }
