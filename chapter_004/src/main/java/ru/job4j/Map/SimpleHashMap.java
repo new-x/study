@@ -4,21 +4,22 @@ import java.util.Iterator;
 
 public class SimpleHashMap<K, V> implements Iterable<V> {
     private Object[] objects = new Object[16];
+    private int countElements = 0;
 
 
     public void put(K key, V value) {
-        if (key == null) {
-            this.objects[0] = new Entry(key, value);
-        }
-        try {
+        if (countElements < objects.length * 0.75) {
+            if (key == null) {
+                this.objects[0] = new Entry(key, value);
+            }
             if (key != null) {
                 this.objects[getIndex(key)] = new Entry(key, value);
             }
-        } catch (IndexOutOfBoundsException exception) {
+        } else {
             changeArraySize();
             this.objects[getIndex(key)] = new Entry(key, value);
         }
-
+        countElements++;
     }
 
     public V get(K key) {
@@ -37,6 +38,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
         } else {
             this.objects[0] = null;
         }
+        countElements--;
     }
 
     public void changeArraySize() {
