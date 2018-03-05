@@ -13,6 +13,9 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
                 this.objects[0] = new Entry(key, value);
             }
             if (key != null) {
+                if (this.objects[getIndex(key)] != null) {
+                    countElements--;
+                }
                 this.objects[getIndex(key)] = new Entry(key, value);
             }
         } else {
@@ -46,7 +49,10 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
         for (Object object : this.objects) {
             if (object != null) {
                 Entry entry = (Entry) object;
-                int newKey = entry.hash % (newObjects.length - 1);
+                int newKey = entry.hash % (newObjects.length);
+                if (newKey < 0) {
+                    newKey *= -1;
+                }
                 newObjects[newKey] = object;
             }
         }
@@ -54,7 +60,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     }
 
     private int getIndex(K key) {
-        int arrayIndex = key.hashCode() % (this.objects.length - 1);
+        int arrayIndex = key.hashCode() % (this.objects.length);
         if (arrayIndex < 0) {
             arrayIndex = arrayIndex * -1;
         }
@@ -71,15 +77,9 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
             public boolean hasNext() {
                 for (; index < objects.length; index++) {
                     Entry entry = (Entry) objects[index];
-                    if (index == 0) {
-                        if (entry.key == null) {
+                        if (entry.value != null) {
                             return true;
                         }
-                    } else {
-                        if (entry.key != null) {
-                            return true;
-                        }
-                    }
                 }
                 return false;
             }
