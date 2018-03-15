@@ -19,8 +19,8 @@ public class SortedOrders {
     }
 
     public void sortOrders() {
-        sortedOrders.add((Order) billOrder.saleOrders.get(0));
-        sortedOrders.add((Order) billOrder.buyOrders.get(0));
+        sortedOrders.addAll(billOrder.saleOrders);
+        sortedOrders.addAll(billOrder.buyOrders);
         Collections.sort(sortedOrders);
     }
 
