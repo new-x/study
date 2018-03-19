@@ -1,12 +1,14 @@
 package ru.job4j.Set;
 
+import java.util.Arrays;
+
 public class SimpleHashSet<E> {
-    private Object[] objects = new Object[1];
+    private Object[] objects = new Object[10];
     private int amount = 0;
 
     public void add(E e) {
         if (!contains(e)) {
-            if (objects[getKey(e)] != null) {
+            if (amount == objects.length) {
                 changeArraySize();
             }
             this.objects[getKey(e)] = e;
@@ -29,10 +31,13 @@ public class SimpleHashSet<E> {
     }
 
     public void changeArraySize() {
-        Object[] newObjects = new Object[this.objects.length + 1];
+        Object[] newObjects = new Object[this.objects.length + 10];
         for (Object object : this.objects) {
             if (object != null) {
                 int newKey = object.hashCode() % newObjects.length;
+                if (newKey < 0) {
+                    newKey *= -1;
+                }
                 newObjects[newKey] = object;
             }
         }
@@ -44,7 +49,11 @@ public class SimpleHashSet<E> {
     }
 
     public int getKey(E e) {
-        return e.hashCode() % this.objects.length;
+        int key = e.hashCode() % this.objects.length;
+        if (key < 0) {
+           key = key * -1;
+        }
+        return key;
     }
 
     public void remove(E e) {
