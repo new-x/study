@@ -29,8 +29,18 @@ public class CoutWords {
         }
     }
 
-    public static void main(String[] args) {
-        new Thread(new Splitter(0)).start();
-        new Thread(new Splitter(1)).start();
+
+    public static void main(String[] args)  {
+        Thread threadOne = new Thread(new Splitter(0));
+        Thread threadTwo = new Thread(new Splitter(1));
+        threadOne.start();
+        threadTwo.start();
+        try {
+            threadOne.join();
+            threadTwo.join();
+            System.out.println("All thread's stop.");
+        } catch (InterruptedException e) {
+            System.out.println("General thread stop.");
+        }
     }
 }
