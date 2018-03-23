@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class UserStorageTest {
     @Test
     public void whenAddDeleteUpdateObjectTrue() {
-        final UserStorage storage = new UserStorage();
+        final UserStorage<User> storage = new UserStorage();
         User user1 = new User(8, 10);
         User user2 = new User(16, 10);
         User user3 = new User(24, 10);
@@ -40,7 +40,7 @@ public class UserStorageTest {
         storage.update(user4);
         storage.delete(user1);
         storage.transfer(32, 24, 10);
-        User result = (User) storage.userStorage.get(1);
+        User result = storage.userStorage.get(1);
         assertThat(storage.userStorage.get(0), is(user2));
         assertThat(storage.userStorage.get(1), is(user3));
         assertThat(storage.userStorage.get(2), is(user4));
@@ -49,7 +49,7 @@ public class UserStorageTest {
 
 
     public static final class addUsers extends Thread {
-        private final UserStorage storage;
+        private final UserStorage<User> storage;
 
         public addUsers(UserStorage storage) {
             this.storage = storage;
