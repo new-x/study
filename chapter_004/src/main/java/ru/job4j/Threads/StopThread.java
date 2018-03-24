@@ -7,7 +7,6 @@ package ru.job4j.Threads;
  */
 
 public class StopThread {
-    static long startTime = System.currentTimeMillis();
 
     public static void main(String[] args) {
         new Thread(new Time()).start();
@@ -27,8 +26,6 @@ public class StopThread {
                     return;
                 }
             }
-
-
         }
     }
 
@@ -37,15 +34,13 @@ public class StopThread {
         public void run() {
             Thread countChar = new Thread(new CountChar());
             countChar.start();
-            long endTime = System.currentTimeMillis();
-            while (true) {
-                if (endTime - startTime > 100) {
-                    countChar.interrupt();
-                    break;
-                }
-                endTime = System.currentTimeMillis();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println("Затрачено времени: " + (endTime - startTime) + " мс.");
+            countChar.interrupt();
         }
     }
 }
+
