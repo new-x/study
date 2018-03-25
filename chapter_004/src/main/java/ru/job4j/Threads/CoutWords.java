@@ -8,31 +8,40 @@ package ru.job4j.Threads;
 
 public class CoutWords {
 
-    public static final class Splitter implements Runnable {
-        private int index;
+    public static final class CountLine implements Runnable {
         private String line = "Это короткая строка для тестирования";
-
-        public Splitter(int index) {
-            this.index = index;
-        }
 
         @Override
         public void run() {
-            if (index == 0) {
-                int count = line.split(" ").length;
-                System.out.println(count);
-            } else if (index == 1) {
-                for(String word : line.split("\\s")){
-                    System.out.println(word);
+            int countLine = 0;
+            for (char symbol : line.toCharArray()) {
+                if (symbol == ' ') {
+                    countLine++;
                 }
             }
+            System.out.println(countLine);
+        }
+    }
+
+    public static final class CountWords implements Runnable {
+        private String line = "Это короткая строка для тестирования";
+
+        @Override
+        public void run() {
+            int countLine = 0;
+            for (char symbol : line.toCharArray()) {
+                if (symbol == ' ') {
+                    countLine++;
+                }
+            }
+            System.out.println(countLine + 1);
         }
     }
 
 
     public static void main(String[] args)  {
-        Thread threadOne = new Thread(new Splitter(0));
-        Thread threadTwo = new Thread(new Splitter(1));
+        Thread threadOne = new Thread(new CountLine());
+        Thread threadTwo = new Thread(new CountWords());
         threadOne.start();
         threadTwo.start();
         try {
