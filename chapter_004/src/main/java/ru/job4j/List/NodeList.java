@@ -1,17 +1,24 @@
 package ru.job4j.List;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+@ThreadSafe
 public class NodeList<E> implements SimpleContainer<E> {
+    @GuardedBy("this")
     private Node<E> previous;
+    @GuardedBy("this")
     private Node<E> first;
+    @GuardedBy("this")
     private Node<E> current;
     private int length = 0;
     private int modCount = 0;
 
-    public Node<E> getNode(int index) {
+    private synchronized Node<E> getNode(int index) {
         if (index >= this.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -22,12 +29,12 @@ public class NodeList<E> implements SimpleContainer<E> {
         return findElement;
     }
 
-    public int size() {
+    public synchronized int size() {
         return length;
     }
 
     @Override
-    public void add(E e) {
+    public synchronized void add(E e) {
         if (this.previous == null) {
             this.first = new Node<>(null, e);
             this.previous = this.first;
@@ -43,7 +50,7 @@ public class NodeList<E> implements SimpleContainer<E> {
     }
 
     @Override
-    public E remove(int index) {
+    public synchronized E remove(int index) {
         Node<E> element = getNode(index);
         if (index == 0) {
             element.next.previous = this.first.previous;
@@ -62,12 +69,12 @@ public class NodeList<E> implements SimpleContainer<E> {
     }
 
     @Override
-    public E get(int index) {
+    public synchronized E get(int index) {
         return (E) getNode(index).element;
     }
 
     @Override
-    public boolean hasDuplicate(E e) {
+    public synchronized boolean hasDuplicate(E e) {
         for (int index = 0; index < length; index++) {
             if (this.get(index).equals(e)) {
                 return true;
@@ -77,7 +84,7 @@ public class NodeList<E> implements SimpleContainer<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public synchronized Iterator<E> iterator() {
         int state = this.modCount;
         return new Iterator<E>() {
             int index = 0;
@@ -85,7 +92,7 @@ public class NodeList<E> implements SimpleContainer<E> {
             Node<E> nextElement = first;
 
             @Override
-            public boolean hasNext() {
+            public synchronized boolean hasNext() {
                 if (state == modCount) {
                     if (nextElement != null) {
                         return true;
@@ -98,7 +105,7 @@ public class NodeList<E> implements SimpleContainer<E> {
             }
 
             @Override
-            public E next() {
+            public synchronized E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
