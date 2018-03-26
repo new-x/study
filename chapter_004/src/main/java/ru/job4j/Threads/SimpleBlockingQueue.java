@@ -26,14 +26,14 @@ public class SimpleBlockingQueue<T> {
         }
     }
 
-    public T peek() throws InterruptedException {
+    public T poll() throws InterruptedException {
         synchronized (this.queue) {
             while (check) {
                 if (this.queue.size() == 0) {
                     this.queue.wait();
                 } else if (this.queue.size() != 0) {
                     this.check = false;
-                    return this.queue.peek();
+                    return this.queue.poll();
                 }
             }
         }

@@ -20,7 +20,6 @@ public class SimpleBlockingQueueTest {
         produser.start();
         produser.join();
         consumer.join();
-
     }
     public class Produser extends Thread {
         SimpleBlockingQueue<Integer> queue;
@@ -49,7 +48,7 @@ public class SimpleBlockingQueueTest {
         @Override
         public void run() {
             try {
-                this.queue.peek();
+                this.queue.poll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
