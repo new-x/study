@@ -19,6 +19,8 @@
         <module>chapter_004</module>
 		<module>chessboard</module>
         <module>workstring</module>
+        <module>testquest</module>
+        <module>testquest1</module>
     </modules>
     
     <dependencies>
