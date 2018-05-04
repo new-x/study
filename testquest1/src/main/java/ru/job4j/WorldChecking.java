@@ -11,7 +11,7 @@ public class WorldChecking {
         if (worldOne.length() == worldTwo.length()) {
             for (int indexOne = 0; indexOne < worldOne.length(); indexOne++) {
                 if (worldOne.charAt(indexOne) != worldTwo.charAt(indexOne)) {
-                    for (int indexTwo = 0; indexTwo < worldTwo.length(); indexTwo++) {
+                    for (int indexTwo = indexOne; indexTwo < worldTwo.length(); indexTwo++) {
                         if (worldOne.charAt(indexOne) == worldTwo.charAt(indexTwo)) {
                             char symbol = worldTwo.charAt(indexOne);
                             worldTwo.setCharAt(indexOne, worldTwo.charAt(indexTwo));
