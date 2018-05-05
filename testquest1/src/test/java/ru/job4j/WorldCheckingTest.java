@@ -3,6 +3,8 @@ package ru.job4j;
 import org.junit.Test;
 import ru.job4j.WorldChecking;
 
+import java.util.HashMap;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,19 +16,24 @@ import static org.junit.Assert.assertThat;
 
 public class WorldCheckingTest {
     @Test
-    public void whenFirstWorldIsSecondWorld() {
+    public void whenFirstWorldIsSecondWorldOne() {
         WorldChecking wch = new WorldChecking();
-        StringBuilder worldOne = new StringBuilder("кирилл");
-        StringBuilder worldTwo = new StringBuilder("рилкил");
-        boolean result = wch.checkWorld(worldOne, worldTwo);
-        assertThat(result, is(true));
+        String first = "мама";
+        String second = "амам";
+        assertThat(wch.checkWorld(first, second), is(true));
+    }
+    @Test
+    public void whenFirstWorldIsSecondWorldTwo() {
+        WorldChecking wch = new WorldChecking();
+        String first = "кирилл";
+        String second = "лилкир";
+        assertThat(wch.checkWorld(first, second), is(true));
     }
     @Test
     public void whenFirstWorldIsNotSecondWorld() {
         WorldChecking wch = new WorldChecking();
-        StringBuilder worldOne = new StringBuilder("мама");
-        StringBuilder worldTwo = new StringBuilder("мааа");
-        boolean result = wch.checkWorld(worldOne, worldTwo);
-        assertThat(result, is(false));
+        String first = "ложь";
+        String second = "бжол";
+        assertThat(wch.checkWorld(first, second), is(false));
     }
 }
