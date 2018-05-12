@@ -27,7 +27,7 @@ public class LockUnlock {
     public synchronized void unlock() {
         if (this.lock != null && this.lock.equals(Thread.currentThread())) {
             this.lock = null;
-            this.notify();
+            this.notifyAll();
         }
     }
 }
