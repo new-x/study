@@ -26,19 +26,21 @@ public class ThreadPool {
             add(new Work());
         }
         for (int index = 0; index < COUNT_CORES; index++) {
-            this.allThreads[index] = new Thread(() -> {
-                while (check) {
-                    if (!this.taskQueue.isEmpty()) {
-                        Work work = this.taskQueue.poll();
-                        if (work != null) {
-                            work.work();
+            synchronized (this) {
+                this.allThreads[index] = new Thread(() -> {
+                    while (check) {
+                        if (!this.taskQueue.isEmpty()) {
+                            Work work = this.taskQueue.poll();
+                            if (work != null) {
+                                work.work();
+                            }
+                        } else {
+                            this.check = false;
                         }
-                    } else {
-                        this.check = false;
                     }
                 }
+                );
             }
-            );
             this.allThreads[index].start();
         }
     }
