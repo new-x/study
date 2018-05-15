@@ -15,7 +15,7 @@ public class ThreadPoolTest {
     public void whenAllThreadsWork() throws InterruptedException {
         ThreadPool th = new ThreadPool();
         th.stratThreads();
-        th.waitThreads();
+        th.shutdown();
 
     }
 }

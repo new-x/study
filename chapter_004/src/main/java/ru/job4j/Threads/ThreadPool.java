@@ -27,29 +27,25 @@ public class ThreadPool {
         }
         for (int index = 0; index < COUNT_CORES; index++) {
             this.allThreads[index] = new Thread(() -> {
-                while (true) {
-                    if (this.taskQueue.isEmpty()) {
-                        break;
+                while (!Thread.interrupted()) {
+                    synchronized (this) {
+                        if (this.taskQueue.peek() != null) {
+                            this.taskQueue.poll().work();
+                        }
                     }
-                    pollWork();
                 }
             });
             this.allThreads[index].start();
         }
     }
 
-    public synchronized void pollWork() {
-        if (this.taskQueue.peek() != null) {
-            this.taskQueue.poll().work();
-        }
-    }
-
-    public void waitThreads() {
-        for (Thread thread : allThreads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void shutdown() {
+        while (true) {
+            if (this.taskQueue.isEmpty()) {
+                for (Thread thread : allThreads) {
+                    thread.interrupt();
+                }
+                break;
             }
         }
     }
@@ -63,7 +59,7 @@ public class ThreadPool {
             try {
                 Thread.sleep((long) (Math.random() * 100));
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
             System.out.println(Thread.currentThread().getName());
         }
