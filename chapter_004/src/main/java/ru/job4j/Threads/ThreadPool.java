@@ -41,11 +41,13 @@ public class ThreadPool {
 
     public void shutdown() {
         while (true) {
-            if (this.taskQueue.isEmpty()) {
-                for (Thread thread : allThreads) {
-                    thread.interrupt();
+            synchronized (this) {
+                if (this.taskQueue.isEmpty()) {
+                    for (Thread thread : allThreads) {
+                        thread.interrupt();
+                    }
+                    break;
                 }
-                break;
             }
         }
     }
