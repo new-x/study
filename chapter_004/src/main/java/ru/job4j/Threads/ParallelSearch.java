@@ -1,15 +1,13 @@
 package ru.job4j.Threads;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by Alekseev Kirill.
@@ -18,14 +16,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 
 
-@ThreadSafe
 public class ParallelSearch extends SimpleFileVisitor {
     private final Path root;
     private final String text;
     private final List<String> exts;
-    @GuardedBy("this")
-    private final ConcurrentLinkedQueue<Path> files = new ConcurrentLinkedQueue<>();
-    @GuardedBy("this")
+    private final BlockingQueue<Path> files = new ArrayBlockingQueue(10);
     private final ConcurrentHashMap<Path, Integer> paths = new ConcurrentHashMap<>();
     private volatile boolean finish = false;
 
@@ -54,24 +49,25 @@ public class ParallelSearch extends SimpleFileVisitor {
             @Override
             public void run() {
                 while (!Thread.interrupted()) {
-                    if (files.peek() != null) {
-                        Path file = files.poll();
-                        try {
+                    Path file = null;
+                    try {
+                        file = files.take();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    try {
                             List<String> lines = Files.readAllLines(Paths.get(String.valueOf(file)), StandardCharsets.UTF_8);
                             for (String line : lines) {
-                                if (line.equals(text)) {
-                                    if (!paths.containsKey(file)) {
-                                        paths.putIfAbsent(file, 1);
-                                    } else {
-                                        Integer value = paths.get(file);
-                                        paths.replace(file, value, ++value);
+                                if (line.contains(text)) {
+                                    if (paths.containsKey(file)) {
+                                        paths.replace(file, paths.get(file), 1 + paths.get(file));
                                     }
+                                    paths.putIfAbsent(file, 1);
                                 }
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
                     if (files.isEmpty() && finish) {
                         Thread.currentThread().interrupt();
                     }
@@ -83,7 +79,7 @@ public class ParallelSearch extends SimpleFileVisitor {
         read.join();
     }
 
-    public synchronized ConcurrentHashMap<Path, Integer> result() throws InterruptedException {
+    public ConcurrentHashMap<Path, Integer> result() throws InterruptedException {
         init();
         return paths;
     }
@@ -95,7 +91,11 @@ public class ParallelSearch extends SimpleFileVisitor {
             if (attrs.isRegularFile()) {
                 for (String exts : exts) {
                     if (path.toString().endsWith(exts)) {
-                        files.add(path);
+                        try {
+                            files.put(path);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
