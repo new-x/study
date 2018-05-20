@@ -19,6 +19,7 @@ public class ThreadPool {
     @GuardedBy("this")
     private volatile Queue<Work> taskQueue = new LinkedList<>();
     private Thread[] allThreads;
+    private volatile boolean check = false;
 
     public void stratThreads() {
         this.allThreads = new Thread[COUNT_CORES];
@@ -28,31 +29,36 @@ public class ThreadPool {
         for (int index = 0; index < COUNT_CORES; index++) {
             this.allThreads[index] = new Thread(() -> {
                 while (!Thread.interrupted()) {
-                    synchronized (this) {
-                        if (this.taskQueue.peek() != null) {
-                            this.taskQueue.poll().work();
-                        }
-                    }
+                    addWork();
                 }
             });
             this.allThreads[index].start();
         }
     }
 
+    public synchronized void addWork() {
+        if (!this.taskQueue.isEmpty()) {
+            if (this.taskQueue.peek() != null) {
+                this.taskQueue.poll().work();
+            }
+        } else {
+            check = true;
+        }
+
+    }
+
     public void shutdown() {
         while (true) {
-            synchronized (this) {
-                if (this.taskQueue.isEmpty()) {
+                if (check) {
                     for (Thread thread : allThreads) {
                         thread.interrupt();
                     }
                     break;
                 }
-            }
         }
     }
 
-    public synchronized void add(Work work) {
+    public void add(Work work) {
         this.taskQueue.offer(work);
     }
 
