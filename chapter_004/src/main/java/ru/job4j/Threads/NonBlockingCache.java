@@ -18,7 +18,7 @@ public class NonBlockingCache {
     public void update(int key, String newName) {
         Base oldModel = (Base) cache.get(key);
             if (oldModel.equals(cache.get(key))) {
-                cache.replace(key, oldModel, new Base(newName, 1 + oldModel.getVersion()));
+                cache.computeIfPresent(key, (k, v) -> new Base(newName, 1 + oldModel.getVersion()));
                 System.out.println(cache.get(key));
             } else {
                 throw new OptimisticException("Error.");
