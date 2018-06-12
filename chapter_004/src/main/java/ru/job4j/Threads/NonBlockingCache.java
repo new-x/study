@@ -9,20 +9,22 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class NonBlockingCache {
-    private ConcurrentHashMap cache = new ConcurrentHashMap();
+    private ConcurrentHashMap<Integer,Base> cache = new ConcurrentHashMap();
 
     public void add(int key, Base model) {
         cache.putIfAbsent(key, model);
     }
 
     public void update(int key, String newName) {
-        Base oldModel = (Base) cache.get(key);
-            if (oldModel.equals(cache.get(key))) {
-                cache.computeIfPresent(key, (k, v) -> new Base(newName, 1 + oldModel.getVersion()));
+        Base oldModel = cache.get(key);
+                cache.computeIfPresent(key, (k, v) -> {
+                    if (oldModel.equals(cache.get(key))){
+                        return new Base(newName, 1 + oldModel.getVersion());
+                    } else {
+                        throw new OptimisticException("Error, this Base is modification.");
+                    }
+                });
                 System.out.println(cache.get(key));
-            } else {
-                throw new OptimisticException("Error.");
-            }
     }
 
     public void delete(Base model) {
