@@ -12,16 +12,17 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class NonBlockingCacheTest {
-    private Thread[] allThreads = new Thread[10];
+    private Thread[] allThreads = new Thread[2];
     private NonBlockingCache cache = new NonBlockingCache();
     @Test
     public void testThread() throws InterruptedException {
-        for (int key = 0; key < 20; key++) {
-            cache.add(key, new Base("Task" + key, 0));
+        Base model = new Base("Task4", 0);
+        for (int index = 0; index < 20; index++) {
+            cache.add(new Base("Task" + index, 0));
         }
-        for (int index = 0; index < 10; index++) {
+        for (int index = 0; index < allThreads.length; index++) {
             this.allThreads[index] = new Thread(() -> {
-                    cache.update(5, "newTask");
+                    cache.update(model);
             });
             this.allThreads[index].start();
         }

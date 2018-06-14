@@ -25,10 +25,6 @@ public class Base {
                 '}';
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +37,13 @@ public class Base {
     public int hashCode() {
 
         return Objects.hash(version);
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public String getName() {
+        return name;
     }
 }
