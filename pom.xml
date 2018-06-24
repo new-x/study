@@ -21,6 +21,7 @@
         <module>workstring</module>
         <module>testquest</module>
         <module>testquest1</module>
+        <module>bombermen</module>
     </modules>
     
     <dependencies>
