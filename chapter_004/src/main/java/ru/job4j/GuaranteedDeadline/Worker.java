@@ -9,8 +9,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class Worker {
-    private ReentrantLock lockOne = new ReentrantLock(false);
-    private ReentrantLock lockTwo = new ReentrantLock(false);
+    private ReentrantLock lockOne = new ReentrantLock(true);
+    private ReentrantLock lockTwo = new ReentrantLock(true);
     private Object one;
     private Object two;
 
