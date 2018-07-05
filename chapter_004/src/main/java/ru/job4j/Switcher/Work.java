@@ -1,5 +1,7 @@
 package ru.job4j.Switcher;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * Created by Alekseev Kirill.
  * Package name: ru.job4j.Switcher
@@ -9,6 +11,7 @@ package ru.job4j.Switcher;
 public class Work implements Runnable {
     private int number;
     private Switcher switcher;
+    private static final Semaphore SEMAPHORE = new Semaphore(1, true);
 
     public Work(int number, Switcher switcher) {
         this.number = number;
@@ -17,7 +20,8 @@ public class Work implements Runnable {
     @Override
     public void run() {
         while (true) {
-            synchronized (switcher) {
+            try {
+                SEMAPHORE.acquire();
                 for (int index = 0; index < 10; index++) {
                     switcher.intToString(number);
                     System.out.println(switcher.retrunString());
@@ -27,12 +31,9 @@ public class Work implements Runnable {
                         e.printStackTrace();
                     }
                 }
-                switcher.notify();
-                try {
-                    switcher.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                SEMAPHORE.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
