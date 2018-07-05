@@ -20,6 +20,6 @@ public class ValidateInput extends ConsoleInput {
                 System.out.println("Please enter a validate number.");
             }
         } while (invalid);
-        return -1;
+        return value;
     }
 }

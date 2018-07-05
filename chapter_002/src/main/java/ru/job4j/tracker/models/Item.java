@@ -1,5 +1,7 @@
 package ru.job4j.tracker.models;
 
+import java.sql.Timestamp;
+
 /**
  * Class Item.
  *
@@ -15,24 +17,26 @@ public class Item {
     /** Description for Item.*/
     private String description;
     /** Data create for Item.*/
-    private long create; // data create for Item
+    private Timestamp create_date; // data create for Item
 
     /**
      * Перекрыте конструктора.
      */
     public Item() {
+
     }
 
     /**
      *
      * @param name передаем параметр в конструктор.
      * @param description передаем описание в конструктор.
-     * @param create передаем дату создания в конструтор.
+     * @param create_date передаем дату создания в конструтор.
      */
-    public Item(String name, String description, long create) {
+    public Item(String id, String name, String description, Timestamp create_date) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.create = create;
+        this.create_date = create_date;
     }
     /**
      * Получаем значение id.
@@ -77,11 +81,19 @@ public class Item {
         this.description = description;
     }
     /**
-     * Устанавливаем значение create.
-     * @return возвращаем дату создания Item.
+     * Устанавливаем значение create_date.
+     * @param create_date устанвливаем дату создания Item.
      */
-    public long getCreate() {
-        return this.create;
+    public void setCreate_date(Timestamp create_date) {
+        this.create_date = create_date;
     }
+    /**
+     * Получаем значение create_date.
+     * @return получаем дату создания Item.
+     */
+    public Timestamp getCreate_date() {
+        return create_date;
+    }
+
 
 }

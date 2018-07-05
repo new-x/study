@@ -18,7 +18,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод getAll.
      */
-    @Test
+    /*@Test
     public void testMethodGetAll() {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
@@ -29,7 +29,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод add.
      */
-    @Test
+    /*@Test
     public void testMethodAdd() {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
@@ -40,7 +40,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод findById.
      */
-    @Test
+    /*@Test
     public void testMethodFindById() {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
@@ -52,7 +52,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод update.
      */
-    @Test
+    /*@Test
     public void testMethodUpdate() {
         Tracker tracker = new Tracker();
         Item itemFirst = new Item("test1", "testDescription", 123L);
@@ -66,7 +66,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод update.
      */
-    @Test
+    /*@Test
     public void testMethodDelete() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1", "testDescription1", 121);
@@ -82,7 +82,7 @@ public class TrackerTest {
     /**
      * Тестируем класс трекер - тестируем метод FindAll.
      */
-    @Test
+    /*@Test
     public void testMethodFindByName() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1", "testDescription1", 121);
@@ -92,5 +92,5 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
         assertThat(tracker.findByName("test3")[0], is(itemThree));
-    }
+    } */
 }

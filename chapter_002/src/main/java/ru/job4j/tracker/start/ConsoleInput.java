@@ -24,13 +24,14 @@ public class ConsoleInput implements Input {
      */
     public String ask(String question) {
         System.out.print(question);
-        return scanner.nextLine();
+        String answer = scanner.nextLine();
+        return answer;
     }
 
-    public int ask(String qustion, int[] range) {
-        int key = Integer.valueOf(this.ask(qustion));
+    public int ask(String qustion, int[] ranges) {
+        int key = Integer.valueOf(ask(qustion));
         boolean exist = false;
-        for (int value : range) {
+        for (int value : ranges) {
             if (value == key) {
                 exist = true;
                 break;

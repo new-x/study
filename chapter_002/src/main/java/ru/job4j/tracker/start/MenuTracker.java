@@ -15,17 +15,16 @@ import java.util.List;
  */
 public class MenuTracker {
     /*
-    * Объект input - вводимое значение с консоли.
-    */
+     * Объект input - вводимое значение с консоли.
+     */
     private Input input;
     /*
-    * Объект tracker - система заявок.
-    */
+     * Объект tracker - система заявок.
+     */
     private Tracker tracker;
     /*
-    * Массив данных actions.
+     * Массив данных actions.
      */
-    //private UserAction[] actions = new UserAction[7];
     private List<UserAction> actions = new ArrayList<>(7);
 
     private int position = 0;
@@ -36,17 +35,12 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions.set(position++, new AddItem());
-        this.actions.set(position++, new ShowItem());
-        this.actions.set(position++, new EditItem());
-        this.actions.set(position++, new DeleteItem());
-        this.actions.set(position++, new FindById());
-        this.actions.set(position++, new FindByName());
-    }
-
-    public void addActions(UserAction action) {
-        this.actions.set(position++, action);
-
+        this.actions.add(position++, new AddItem());
+        this.actions.add(position++, new ShowItem());
+        this.actions.add(position++, new EditItem());
+        this.actions.add(position++, new DeleteItem());
+        this.actions.add(position++, new FindById());
+        this.actions.add(position++, new FindByName());
     }
 
     public void select(int key) {
@@ -62,6 +56,40 @@ public class MenuTracker {
 
     }
 
+    private static class ShowItem extends BaseAction implements UserAction {
+        public ShowItem() {
+            super("Show all items", 1);
+        }
+
+        public void execute(Input input, Tracker tracker) {
+            for (Item item : tracker.getAll()) {
+                System.out.println(String.format("%s %s %s %s",
+                        item.getId(),
+                        item.getName(),
+                        item.getDescription(),
+                        item.getCreate_date()));
+            }
+        }
+    }
+
+    private static class FindById extends BaseAction implements UserAction {
+        public FindById() {
+            super("Find Item by ID", 4);
+        }
+
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Please enter item ID: ");
+            if (!(tracker.findById(id) == null)) {
+                System.out.println(String.format("%s %s %s",
+                        tracker.findById(id).getId(),
+                        tracker.findById(id).getName(),
+                        tracker.findById(id).getDescription()));
+            } else {
+                System.out.println("Object not found by this ID.");
+            }
+        }
+    }
+
     private class AddItem extends BaseAction implements UserAction {
         public AddItem() {
             super("Add the new Item", 0);
@@ -74,29 +102,6 @@ public class MenuTracker {
         }
     }
 
-    private static class ShowItem extends BaseAction implements UserAction {
-        public ShowItem() {
-            super("Show all items", 1);
-        }
-
-        public void execute(Input input, Tracker tracker) {
-            for (Item item : tracker.getAll()) {
-                System.out.println(String.format("%s %s %s", item.getId(), item.getName(), item.getDescription()));
-            }
-        }
-    }
-
-    private static class FindById extends BaseAction implements UserAction {
-        public FindById() {
-            super("Find Item by ID", 4);
-        }
-
-        public void execute(Input input, Tracker tracker) {
-            String id = input.ask("Please enter item ID: ");
-            System.out.println(String.format("%s %s %s", tracker.findById(id).getId(), tracker.findById(id).getName(), tracker.findById(id).getDescription()));
-        }
-    }
-
     private class FindByName extends BaseAction implements UserAction {
         public FindByName() {
             super("Find Item by name", 5);
@@ -104,9 +109,14 @@ public class MenuTracker {
 
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please eneter a task name: ");
-            Item[] itemName = tracker.findByName(name);
-            //System.out.println(tracker.findByName(name));
-            System.out.println(String.format("%s %s %s", itemName[0].getId(), itemName[0].getName(), itemName[0].getDescription()));
+            List<Item> items = tracker.findByName(name);
+            for (Item item : items) {
+                System.out.println(String.format("%s %s %s %s",
+                        item.getId(),
+                        item.getName(),
+                        item.getDescription(),
+                        item.getCreate_date()));
+            }
         }
     }
 }

@@ -12,9 +12,9 @@ public class StartUITest {
     /**
      * @param args передается в метод main.
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"create task question"});
         new StartUI(input, tracker).init();
-    }
+    }*/
 }
