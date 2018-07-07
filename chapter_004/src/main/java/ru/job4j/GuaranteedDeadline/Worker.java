@@ -1,5 +1,7 @@
 package ru.job4j.GuaranteedDeadline;
 
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -8,34 +10,34 @@ import java.util.concurrent.locks.ReentrantLock;
  * Create data: 24.06.2018 13:04
  */
 
-public class Worker {
-    private ReentrantLock lockOne = new ReentrantLock(true);
-    private ReentrantLock lockTwo = new ReentrantLock(true);
-    private Object one;
-    private Object two;
+public class Worker implements Runnable {
+    private Worker block;
 
-    public Worker(Object one, Object two) {
-        this.one = one;
-        this.two = two;
-    }
-    public void methodA() {
-        lockOne.lock();
-        lockTwo.lock();
-        one = "One";
-        System.out.println(one);
-        lockTwo.lock();
-        lockOne.unlock();
+    private final CyclicBarrier barrier;
 
+    public Worker(CyclicBarrier barrier) {
+        this.barrier = barrier;
     }
 
-    public void methodB() {
-        lockOne.lock();
-        lockTwo.lock();
-        two = "two";
-        System.out.println(two);
-        lockTwo.unlock();
-        lockOne.unlock();
-
+    public void initWorker(Worker block) {
+        this.block = block;
     }
 
+    private synchronized void lock() {
+        System.out.println("Not print.");
+    }
+
+    @Override
+    public void run() {
+        synchronized (this) {
+            System.out.println(String.format("%s захватил монитор", Thread.currentThread().getName()));
+            try {
+                this.barrier.await();
+            } catch (InterruptedException | BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Lock.");
+            this.block.lock();
+        }
+    }
 }

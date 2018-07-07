@@ -2,6 +2,8 @@ package ru.job4j.GuaranteedDeadline;
 
 import org.junit.Test;
 
+import java.util.concurrent.CyclicBarrier;
+
 /**
  * Created by Alekseev Kirill.
  * Package name: ru.job4j.GuaranteedDeadline
@@ -10,23 +12,25 @@ import org.junit.Test;
 
 public class WorkerTest {
     @Test
-    public void whenRunWorkerIsDeadlock() throws InterruptedException {
-        Object one = new Object();
-        Object two = new Object();
-        Worker worker = new Worker(one, two);
-        Thread[] threads = new Thread[10];
-        for (int index = 0; index < threads.length; index++) {
-            threads[index] = new Thread() {
-                public void run() {
-                    worker.methodA();
-                    worker.methodB();
-                }
+    public void whenRunWorkerIsDeadlock() {
+        CyclicBarrier barrier = new CyclicBarrier(2);
+        Worker workerOne = new Worker(barrier);
+        Worker workerTwo = new Worker(barrier);
 
-            };
-            threads[index].start();
+        workerOne.initWorker(workerTwo);
+        workerTwo.initWorker(workerOne);
+
+        Thread one = new Thread(workerOne);
+        Thread two = new Thread(workerTwo);
+        one.start();
+        two.start();
+
+        try {
+            one.join();
+            two.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        for (Thread thread : threads) {
-            thread.join();
-        }
+
     }
 }
