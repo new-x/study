@@ -28,7 +28,7 @@ public class ParserMagnit {
     private Properties config;
     private Properties sqlrequest;
     private Connection connection;
-    public static final String IN_FILE = "C:\\Storage\\Java\\study\\chapter_005\\src\\main\\resources\\file.xml";
+    public static final String IN_FILE = "./chapter_005/src/main/resources/file.xml";
     public static final StoreXML storeXML = new StoreXML();
     private static final Logger Log = LoggerFactory.getLogger(ParserMagnit.class);
 

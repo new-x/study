@@ -14,8 +14,8 @@ import static ru.job4j.magnit.ParserMagnit.IN_FILE;
  */
 
 public class ConvertXSQT {
-    private final String XSLT_CONFIG = "C:\\Storage\\Java\\study\\chapter_005\\src\\main\\resources\\transformer.xsl";
-    private final String OUT_FILE = "C:\\Storage\\Java\\study\\chapter_005\\src\\main\\resources\\output.xml";
+    private final String XSLT_CONFIG = "./chapter_005/src/main/resources/transformer.xsl";
+    private final String OUT_FILE = "./chapter_005/src/main/resources/output.xml";
     public void convertToXSLT() throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
         Source xslt = new StreamSource(new File(XSLT_CONFIG));
