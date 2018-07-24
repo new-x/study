@@ -52,15 +52,16 @@ public class Parser {
     }
 
     public boolean checkName(String text) {
+        boolean result = false;
+        if (text.toLowerCase().contains("java")) {
+            result = true;
+        }
         for (String badWord : BADWORDS) {
             if (text.toLowerCase().contains(badWord)) {
-                return false;
+                result = false;
             }
         }
-        if (text.toLowerCase().contains("java")) {
-            return true;
-        }
-        return false;
+        return result;
     }
 
     public void close() {

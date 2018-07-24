@@ -54,13 +54,14 @@ public class Data {
     }
 
     public boolean checkDate(Calendar dateThread) {
+        boolean result = false;
         if (this.lastDate == null && dateThread.after(this.STARTDATE)) {
-                return true;
+                result = true;
         } else if (this.lastDate != null) {
             if (this.lastDate.after(dateThread) && dateThread.after(this.STARTDATE)) {
-                return true;
+                result = true;
             }
         }
-        return false;
+        return result;
     }
 }

@@ -15,15 +15,8 @@ public class Start implements Job {
 
     public static void main(String[] args) throws SchedulerException {
         path = args[0];
-        //path = "app.properties";
         Cron cron = new Cron();
         cron.initCron(path);
-
-        /*String path = "app.properties";
-        Parser parser = new Parser();
-
-        parser.findJobs(path);
-        parser.close();*/
     }
 
     @Override
