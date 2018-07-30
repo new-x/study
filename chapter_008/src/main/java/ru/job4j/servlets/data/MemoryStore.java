@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.GregorianCalendar;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Alekseev Kirill.
@@ -12,18 +13,23 @@ import java.util.concurrent.ConcurrentHashMap;
  * Create data: 23.07.2018 17:15
  */
 
-public class MemoryStore<K> implements Store<K,User> {
+public class MemoryStore<K> implements Store {
     private static final Logger Log = LoggerFactory.getLogger(MemoryStore.class);
-    private static final MemoryStore INSTANCE = new MemoryStore();
-    private ConcurrentHashMap<K, User> store = new ConcurrentHashMap<>();
 
-    public static synchronized MemoryStore getInstance() {
+    private static final MemoryStore INSTANCE = new MemoryStore();
+
+    private ConcurrentHashMap<Integer, User> store = new ConcurrentHashMap<>();
+
+    private final AtomicInteger counter = new AtomicInteger();
+
+    public static MemoryStore getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public void add(int id, String name, String login, String email) {
-        this.store.putIfAbsent((K) new Integer(id), new User(id, name, login, email, new GregorianCalendar()));
+    public void add(String name, String login, String email) {
+        Integer id = counter.incrementAndGet();
+        this.store.putIfAbsent(new Integer(id), new User(id, name, login, email, new GregorianCalendar()));
     }
 
     @Override
@@ -32,7 +38,7 @@ public class MemoryStore<K> implements Store<K,User> {
         user.setName(name);
         user.setLogin(login);
         user.setEmail(email);
-        this.store.replace((K) new Integer(id), user);
+        this.store.replace (new Integer(id), user);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class MemoryStore<K> implements Store<K,User> {
     }
 
     @Override
-    public ConcurrentHashMap<K, User> findAll() {
+    public ConcurrentHashMap<Integer, User> findAll() {
         return this.store;
     }
 
@@ -53,4 +59,8 @@ public class MemoryStore<K> implements Store<K,User> {
         return false;
     }
 
+    @Override
+    public User getUser(int id) {
+        return this.store.get(id);
+    }
 }

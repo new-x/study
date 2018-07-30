@@ -30,23 +30,17 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         if (request.getParameter("action").equals("add")) {
-            if (logic.checkInt(request.getParameter("id"))) {
-                logic.add(Integer.parseInt(request.getParameter("id")),
-                        request.getParameter("name"),
+                logic.add(request.getParameter("name"),
                         request.getParameter("login"),
                         request.getParameter("email"));
-            }
+
         } else if (request.getParameter("action").equals("update")) {
-            if (logic.checkInt(request.getParameter("id"))) {
                 logic.update(Integer.parseInt(request.getParameter("id")),
                         request.getParameter("name"),
                         request.getParameter("login"),
                         request.getParameter("email"));
-            }
         } else if (request.getParameter("action").equals("delete")) {
-            if (logic.checkInt(request.getParameter("id"))) {
                 logic.delete(Integer.parseInt(request.getParameter("id")));
-            }
         }
         doGet(request, response);
     }
