@@ -1,6 +1,6 @@
 package ru.job4j.servlets.data;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
  * Created by Alekseev Kirill.
@@ -9,15 +9,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public interface Store {
-    public void add(String name, String login, String email);
+    public void add(User user);
 
-    public void update(int id, String name, String login, String email);
+    public void update(User user);
 
     public void delete(int id);
 
-    public ConcurrentHashMap<Integer, User> findAll();
+    public List<User> findAll();
 
-    public boolean findById(int id);
-
-    public User getUser(int id);
+    public User findById(int id);
 }

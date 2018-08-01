@@ -41,10 +41,9 @@ public class UserUpdateServlet extends HttpServlet {
         if (request.getParameter("name") != null &&
                 request.getParameter("login") != null &&
                 request.getParameter("email") !=null) {
-            logic.update(this.id,
-                    request.getParameter("name"),
+            logic.update(new User(request.getParameter("name"),
                     request.getParameter("login"),
-                    request.getParameter("email"));
+                    request.getParameter("email")));
             message = "<b>User update.</b>" +
                     "<form action='" + request.getContextPath() + "/list'method='GET'>" +
                     "<input type='submit' value='See all Users'/>" +

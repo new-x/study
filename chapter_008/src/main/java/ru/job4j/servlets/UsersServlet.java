@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
  * Created by Alekseev Kirill.
@@ -20,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class UsersServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
-    private ConcurrentHashMap<Integer, User> users;
+    private List<User> users;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,8 +48,7 @@ public class UsersServlet extends HttpServlet {
     private String getAllUsers(String contextPath, String message) {
         StringBuilder sb = new StringBuilder();
         StringBuilder allUsers = new StringBuilder();
-        for (Map.Entry entry : users.entrySet()) {
-            User user = (User) entry.getValue();
+        for (User user : users) {
             allUsers.append("<tr><td>" + user.getName() + "</td>" +
                     "<td>" + user.getLogin() + "</td>" +
                     "<td>" + user.getEmail() + "</td>" +

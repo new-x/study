@@ -1,5 +1,6 @@
 package ru.job4j.servlets;
 
+import ru.job4j.servlets.data.User;
 import ru.job4j.servlets.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Alekseev Kirill.
@@ -30,17 +32,20 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         if (request.getParameter("action").equals("add")) {
-                logic.add(request.getParameter("name"),
-                        request.getParameter("login"),
-                        request.getParameter("email"));
-
+            logic.add(new User(
+                    request.getParameter("name"),
+                    request.getParameter("login"),
+                    request.getParameter("email"),
+                    new GregorianCalendar()));
         } else if (request.getParameter("action").equals("update")) {
-                logic.update(Integer.parseInt(request.getParameter("id")),
-                        request.getParameter("name"),
-                        request.getParameter("login"),
-                        request.getParameter("email"));
+            logic.update(new User(
+                    Integer.parseInt(request.getParameter("id")),
+                    request.getParameter("name"),
+                    request.getParameter("login"),
+                    request.getParameter("email"),
+                    new GregorianCalendar()));
         } else if (request.getParameter("action").equals("delete")) {
-                logic.delete(Integer.parseInt(request.getParameter("id")));
+            logic.delete(Integer.parseInt(request.getParameter("id")));
         }
         response.sendRedirect(String.format("%s/index.jsp", request.getContextPath()));
     }

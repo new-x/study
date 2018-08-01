@@ -1,5 +1,6 @@
 package ru.job4j.servlets;
 
+import ru.job4j.servlets.data.User;
 import ru.job4j.servlets.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Alekseev Kirill.
@@ -33,9 +35,10 @@ public class UserCreateServlet extends HttpServlet {
         if (request.getParameter("name") != null &&
                 request.getParameter("login") != null &&
                 request.getParameter("email") != null) {
-            logic.add(request.getParameter("name"),
-                    request.getParameter("login"),
-                    request.getParameter("email"));
+            logic.add(new User(request.getParameter("name"),
+                                request.getParameter("login"),
+                                request.getParameter("email"),
+                                new GregorianCalendar()));
             writer.append(createUser(request.getContextPath(),
                     "<b>User added.</b>" +
                             "<form action='" + request.getContextPath() + "/list'method='GET'>" +

@@ -1,5 +1,6 @@
 package ru.job4j.servlets.data;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -15,6 +16,19 @@ public class User {
     private String login;
     private String email;
     private Calendar createDate;
+
+    public User(String name, String login, String email, Calendar createDate) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+
+    public User(String name, String login, String email) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+    }
 
     public User(int id, String name, String login, String email, Calendar createDate) {
         this.id = id;
