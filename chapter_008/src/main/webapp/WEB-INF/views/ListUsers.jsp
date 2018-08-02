@@ -1,5 +1,4 @@
-<%@ page import="ru.job4j.servlets.data.User" %>
-<%@ page import="ru.job4j.servlets.logic.ValidateService" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: aleks
@@ -13,7 +12,7 @@
     <title>List Users</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/add.jsp" method="GET">
+<form action="${pageContext.servletContext.contextPath}/add" method="GET">
     <input type="submit" value="Add user">
 </form>
 <table style="border: 1px solid black;" cellpadding="1" cellspacing="1" border="1">
@@ -23,29 +22,32 @@
         <td>Email</td>
         <td>Create Date</td>
     </tr>
-    <% for (User user : ValidateService.getInstance().findAll()) { %>
+    <c:forEach items="${users}" var = "user">
     <tr>
-        <td><%=user.getLogin()%>
+        <td><c:out value="${user.login}"></c:out>
         </td>
-        <td><%=user.getName()%>
+        <td><c:out value="${user.name}"></c:out>
         </td>
-        <td><%=user.getEmail()%>
+        <td><c:out value="${user.email}"></c:out>
         </td>
-        <td><%=user.getCreateDate().getTime()%>
+        <td><c:out value="${user.createDate.getTime()}"></c:out>
         </td>
         <td>
-            <form action="<%=request.getContextPath()%>/edit.jsp?id=<%=user.getId()%>" method="POST">
+            <form action="${pageContext.servletContext.contextPath}/edit" method="GET">
+                <input type="hidden" name="id" value="${user.id}">
                 <input type="submit" value="Edit">
             </form>
 
         </td>
         <td>
-            <form action="<%=request.getContextPath()%>/users?action=delete&id=<%=user.getId()%>" method="POST">
+            <form action="${pageContext.servletContext.contextPath}/" method="POST">
+                <input type="hidden" name="action" value="delete"/>
+                <input type="hidden" name="id" value="${user.id}">
                 <input type="submit" value="Delete">
             </form>
         </td>
     </tr>
-    <%};%>
+    </c:forEach>
 </table>
 
 </body>

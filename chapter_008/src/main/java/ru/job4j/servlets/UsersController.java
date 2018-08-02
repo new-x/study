@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.GregorianCalendar;
 
 /**
@@ -17,15 +16,14 @@ import java.util.GregorianCalendar;
  * Create data: 23.07.2018 16:54
  */
 
-public class UserServlet extends HttpServlet {
+public class UsersController extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(response.getOutputStream());
-        writer.append("" + logic.findAll());
-        writer.flush();
+            request.setAttribute("users", ValidateService.getInstance().findAll());
+            request.getRequestDispatcher("/WEB-INF/views/ListUsers.jsp").forward(request, response);
+
     }
 
     @Override
@@ -47,6 +45,6 @@ public class UserServlet extends HttpServlet {
         } else if (request.getParameter("action").equals("delete")) {
             logic.delete(Integer.parseInt(request.getParameter("id")));
         }
-        response.sendRedirect(String.format("%s/index.jsp", request.getContextPath()));
+        response.sendRedirect(String.format("%s/", request.getContextPath()));
     }
 }

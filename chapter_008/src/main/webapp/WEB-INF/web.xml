@@ -5,13 +5,31 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.UserServlet</servlet-class>
+        <servlet-name>User Controller Servlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UsersController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>User Create Servlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UserCreateServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>User Update Servlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UserUpdateServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
+        <servlet-name>User Controller Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User Create Servlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User Update Servlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
     </servlet-mapping>
 </web-app>
 
