@@ -2,25 +2,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: aleks
-  Date: 31.07.2018
-  Time: 15:28
+  Date: 03.08.2018
+  Time: 19:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add user</title>
+    <title>User authorization</title>
 </head>
 <body>
-<c:if test="${sessionScope.user.role.id == 1}">
-<form action="${pageContext.servletContext.contextPath}/" method="POST">
+<c:if test="${error != ''}">
+    <div style="background-color: red">
+            <c:out value="${error}"/>
+    </div>
+</c:if>
+<form action="${pageContext.servletContext.contextPath}/signin" method="POST">
     <input type="hidden" name="action" value="add">
-    Name : <input type="text" name="name"><br>
     Login : <input type="text" name="login"><br>
     Password : <input type="password" name="password"><br>
-    Email : <input type="text" name="email"><br>
-    <input type="submit" value="Create User">
+    <input type="submit" value="Log In">
 </form>
-</c:if>
 </body>
 </html>

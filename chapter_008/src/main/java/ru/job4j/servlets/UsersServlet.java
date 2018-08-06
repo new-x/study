@@ -19,13 +19,11 @@ import java.util.List;
 
 public class UsersServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
-    private List<User> users;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter writer = new PrintWriter(response.getOutputStream());
-        users = logic.findAll();
         writer.append(getAllUsers(request.getContextPath(), ""));
         writer.flush();
     }
@@ -48,7 +46,7 @@ public class UsersServlet extends HttpServlet {
     private String getAllUsers(String contextPath, String message) {
         StringBuilder sb = new StringBuilder();
         StringBuilder allUsers = new StringBuilder();
-        for (User user : users) {
+        for (User user : logic.findAll()) {
             allUsers.append("<tr><td>" + user.getName() + "</td>" +
                     "<td>" + user.getLogin() + "</td>" +
                     "<td>" + user.getEmail() + "</td>" +

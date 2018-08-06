@@ -12,16 +12,37 @@ import java.util.Objects;
 
 public class User {
     private int id;
-    private String name;
     private String login;
+    private String password;
+    private String name;
     private String email;
     private Calendar createDate;
+    private Role role;
 
-    public User(String name, String login, String email, Calendar createDate) {
+    public User(int id, String name, String login, String password, String email, Calendar createDate, Role role) {
+        this.id = id;
         this.name = name;
         this.login = login;
+        this.password = password;
         this.email = email;
         this.createDate = createDate;
+        this.role = role;
+    }
+
+    public User(String name, String login, String password, String email, Calendar createDate) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.createDate = createDate;
+    }
+
+    public User(int id, String name, String login, String password, String email) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
     }
 
     public User(String name, String login, String email) {
@@ -30,12 +51,11 @@ public class User {
         this.email = email;
     }
 
-    public User(int id, String name, String login, String email, Calendar createDate) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-        this.createDate = createDate;
+    public Role getRole() {
+        return role;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public int getId() {
@@ -58,26 +78,18 @@ public class User {
         return createDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
-        return "User " +
-                "id = " + id +
-                ", name = '" + name + '\'' +
-                ", login = '" + login + '\'' +
-                ", email = '" + email + '\'' +
-                ", createDate = " + createDate.getTime();
+        return "User{" +
+                "id=" + id +
+                ", login = " + login +
+                ", password = " + password +
+                ", name = " + name  +
+                ", email = " + email +
+                ", createDate = " + createDate.getTime() +
+                ", roleID = " + role.getId() +
+                ", roleName = " + role.getName() +
+                '}';
     }
 
     @Override

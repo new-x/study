@@ -56,4 +56,13 @@ public class MemoryStore implements Store {
         return null;
     }
 
+    @Override
+    public User findByLogin(String login) {
+        return null;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return null;
+    }
 }

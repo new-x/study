@@ -1,5 +1,3 @@
-<%@ page import="ru.job4j.servlets.data.User" %>
-<%@ page import="ru.job4j.servlets.logic.ValidateService" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
@@ -19,7 +17,15 @@
     <input type="hidden" name="id" value="${user.id}"/>
     New Name : <input type="text" name="name" value="${user.name}"/><br>
     New Login : <input type="text" name="login" value="${user.login}"/><br>
+    New Password : <input type="password" name="password" value="${user.password}"/><br>
     New Email : <input type="text" name="email" value="${user.email}"/><br>
+    <c:if test="${user.role.id == 1}">
+    New Role: <select name="roles_id"><br>
+    <c:forEach items="${sessionScope.allRoles}" var="role">
+        <option value="${role.id}">${role.name}</option>
+    </c:forEach>
+    </c:if>
+</select>
     <input type="submit" value="Edit User"/>
 </form>
 </body>

@@ -18,4 +18,8 @@ public interface Store {
     public List<User> findAll();
 
     public User findById(int id);
+
+    public User findByLogin(String login);
+
+    public List<Role> getAllRoles();
 }
