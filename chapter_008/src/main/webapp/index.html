@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Vertical (basic) form</h2>
+    <form action="/index.html">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="name" class="form-control" id="name" placeholder="Enter your name." name="name">
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="password" class="form-control" id="surname" placeholder="Enter your surname." name="surname">
+        </div>
+        <label for="gender">Your gender:</label>
+        <select class="form-control" id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+        <label for="about">About you:</label>
+        <textarea class="form-control" rows="5" id="about"></textarea>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Gender</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Maxim</td>
+            <td>Bunin</td>
+            <td>Male</td>
+        </tr>
+        <tr>
+            <td>Alexandr</td>
+            <td>Krukov</td>
+            <td>Male</td>
+        </tr>
+        <tr>
+            <td>Nastya</td>
+            <td>Maximova</td>
+            <td>Female</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
