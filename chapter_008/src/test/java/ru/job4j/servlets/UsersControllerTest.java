@@ -34,7 +34,6 @@ public class UsersControllerTest extends Mockito {
         when(request.getParameter("login")).thenReturn("petr");
         when(request.getParameter("password")).thenReturn("petr");
         when(request.getParameter("email")).thenReturn("petr@mail.ru");
-
         new UsersController().doPost(request, response);
         assertTrue(store.findByLogin("petr").getLogin().equals("petr"));
         store.delete(store.findByLogin("petr").getId());
@@ -44,10 +43,8 @@ public class UsersControllerTest extends Mockito {
     public void testUserControllerUpdateUser() throws ServletException, IOException {
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
-
         User user = new User(1,"Maxim", "maxim", "maxim", "maxim@mail.ru", new GregorianCalendar(), new Role(1, "Administrator"));
         store.add(user);
-
         when(request.getParameter("action")).thenReturn("update");
         when(request.getParameter("id")).thenReturn(String.valueOf(store.findByLogin("maxim").getId()));
         when(request.getParameter("name")).thenReturn("Kirill");
@@ -55,8 +52,6 @@ public class UsersControllerTest extends Mockito {
         when(request.getParameter("password")).thenReturn("kirill");
         when(request.getParameter("email")).thenReturn("kirill@mail.ru");
         when(request.getParameter("roles_id")).thenReturn("1");
-
-
         new UsersController().doPost(request, response);
         assertTrue(store.findByLogin("kirill").getLogin().equals("kirill"));
         store.delete(store.findByLogin("kirill").getId());
@@ -66,13 +61,10 @@ public class UsersControllerTest extends Mockito {
     public void testUserControllerDeleteUser() throws ServletException, IOException {
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
-
         User user = new User(1,"Kirill", "kirill", "kirill", "mail@mail.ru", new GregorianCalendar(), new Role(1, "Administrator"));
         store.add(user);
-
         when(request.getParameter("action")).thenReturn("delete");
         when(request.getParameter("id")).thenReturn(String.valueOf(store.findByLogin("kirill").getId()));
-
         new UsersController().doPost(request, response);
         assertNull(store.findByLogin("kirill"));
     }
