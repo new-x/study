@@ -25,6 +25,21 @@
             }
             return result;
         }
+        function addRow() {
+            var table = document.getElementById("userTable");
+            var row = table.insertRow(document.getElementById("userTable").rows.length);
+            var name = row.insertCell(0);
+            var surname = row.insertCell(1);
+            var gender = row.insertCell(2);
+            name.innerHTML = document.getElementById("name").value;
+            surname.innerHTML = document.getElementById("surname").value;
+            gender.innerHTML = document.getElementById("gender").value;
+        }
+        function deleteRow() {
+            if (document.getElementById("userTable").rows.length - 1 != 0) {
+                document.getElementById("userTable").deleteRow(document.getElementById("userTable").rows.length - 1);
+            }
+        }
     </script>
 </head>
 <body>
@@ -51,7 +66,7 @@
 </div>
 
 <div class="container">
-    <table class="table table-hover">
+    <table id="userTable" class="table table-hover">
         <thead>
         <tr>
             <th>Name</th>
@@ -77,6 +92,8 @@
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-default" onclick="addRow()">Add Row</button>
+    <button class="btn btn-default" onclick="deleteRow()">Delete Row</button>
 </div>
 
 </body>
