@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Add User</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -9,14 +9,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function validate() {
-            var result = true;
             var name = document.getElementById("name").value;
             var surname = document.getElementById("surname").value;
             var about = document.getElementById("about").value;
+            var result = true;
             if (name == '') {
                 alert("Please input name.");
                 result = false;
-            }else if (surname == '') {
+            } else if (surname == '') {
                 alert("Please input surname.");
                 result = false;
             } else if (about == '') {
@@ -25,19 +25,47 @@
             }
             return result;
         }
-        function addRow() {
-            var table = document.getElementById("userTable");
-            var row = table.insertRow(document.getElementById("userTable").rows.length);
-            var name = row.insertCell(0);
-            var surname = row.insertCell(1);
-            var gender = row.insertCell(2);
-            name.innerHTML = document.getElementById("name").value;
-            surname.innerHTML = document.getElementById("surname").value;
-            gender.innerHTML = document.getElementById("gender").value;
+
+        function getUsers() {
+            $.ajax({
+                url: "./add",
+                type: "GET",
+                complete: function (data) {
+                    var users = JSON.parse(data.responseText);
+                    var result = "";
+                    if (data.responseText !== undefined) {
+                        for (var index = 0; index < users.length; ++index) {
+                            result += "<tr>\n" +
+                                "            <th>" + users[index].name + "</th>\n" +
+                                "            <th>" + users[index].surname + "</th>\n" +
+                                "            <th>" + users[index].gender + "</th>\n" +
+                                "           </tr>"
+                        }
+                    }
+                    var table = document.getElementById('userTable');
+                    table.innerHTML = result
+                }
+
+            })
+
         }
-        function deleteRow() {
-            if (document.getElementById("userTable").rows.length - 1 != 0) {
-                document.getElementById("userTable").deleteRow(document.getElementById("userTable").rows.length - 1);
+
+        function sendUser() {
+            if (validate() == true) {
+                $.ajax({
+                    method: 'POST',
+                    url: './add',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        'name': document.getElementById("name").value,
+                        'surname': document.getElementById("surname").value,
+                        'gender': document.getElementById("gender").value
+                    }),
+                    complete: function () {
+                        getUsers();
+                    }
+                })
             }
         }
     </script>
@@ -61,7 +89,7 @@
         </select>
         <label for="about">About you:</label>
         <textarea class="form-control" rows="5" id="about" name="about"></textarea>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="button" class="btn btn-default" onclick="sendUser()">Add Row</button>
     </form>
 </div>
 
@@ -75,25 +103,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Maxim</td>
-            <td>Bunin</td>
-            <td>Male</td>
-        </tr>
-        <tr>
-            <td>Alexandr</td>
-            <td>Krukov</td>
-            <td>Male</td>
-        </tr>
-        <tr>
-            <td>Nastya</td>
-            <td>Maximova</td>
-            <td>Female</td>
-        </tr>
         </tbody>
     </table>
-    <button class="btn btn-default" onclick="addRow()">Add Row</button>
-    <button class="btn btn-default" onclick="deleteRow()">Delete Row</button>
 </div>
 
 </body>
