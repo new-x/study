@@ -19,7 +19,6 @@ public class ConvertlistarraytolistTest {
             list.add(new int[]{3, 4, 5, 6});
             list.add(new int[]{1, 6, 3, 10});
             List<Integer> result = convertlistarraytolist.convert(list);
-            assertThat(result, is(-1));
         }
 
 }

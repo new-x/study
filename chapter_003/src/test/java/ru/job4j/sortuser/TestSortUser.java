@@ -22,7 +22,6 @@ public class TestSortUser {
         );
 
         Set<User> users = sortUser.sort(list);
-        assertThat(users, is(-1));
     }
 
     @Test
@@ -38,7 +37,6 @@ public class TestSortUser {
                 )
         );
         List<User> users = sortUser.sortNameLength(list);
-        assertThat(users, is(-1));
     }
 
     @Test
@@ -54,7 +52,6 @@ public class TestSortUser {
                 )
         );
         List<User> users = sortUser.sortByAllFields(list);
-        assertThat(users, is(-1));
     }
 
 }

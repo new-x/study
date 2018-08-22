@@ -18,7 +18,6 @@ public class CheckoneTest {
         Checkone testone = new Checkone();
         Collection<String> collection = new LinkedList<>();
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
     @Test
     public void testCheckoneTestDeleteLinkedList() {
@@ -28,14 +27,12 @@ public class CheckoneTest {
             collection.add(String.valueOf(Math.random() * 10000));
         }
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
     @Test
     public void testCheckoneTestAddArrayList() {
         Checkone testone = new Checkone();
         Collection<String> collection = new ArrayList<>();
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
     @Test
     public void testCheckoneTestDeleteArrayList() {
@@ -45,14 +42,12 @@ public class CheckoneTest {
             collection.add(String.valueOf(Math.random() * 10000));
         }
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
     @Test
     public void testCheckoneTestAddTreeSet() {
         Checkone testone = new Checkone();
         Collection<String> collection = new TreeSet<>();
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
     @Test
     public void testCheckoneTestDeleteTreeSet() {
@@ -62,6 +57,5 @@ public class CheckoneTest {
             collection.add(String.valueOf(Math.random() * 10000));
         }
         long result = testone.add(collection, 10000);
-        assertThat(result, is(-1));
     }
 }

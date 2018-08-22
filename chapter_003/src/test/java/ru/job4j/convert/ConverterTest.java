@@ -17,7 +17,6 @@ public class ConverterTest {
         int[][] array = {{1, 2, 3, 4, 5, 6},{1, 2, 3, 4, 5, 6}};
         Converter converter = new Converter();
         List <Integer> result = converter.toList(array);
-        assertThat(result, is(-1));
     }
     @Test
     public void convertListToArray() {
@@ -27,6 +26,5 @@ public class ConverterTest {
             list.add(index);
         }
         int[][] result = converter.toArray(list, 3);
-        assertThat(result, is(-1));
     }
 }

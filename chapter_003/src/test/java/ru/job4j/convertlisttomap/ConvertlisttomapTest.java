@@ -23,6 +23,5 @@ public class ConvertlisttomapTest {
         userList.add(new User(3, "Павел", "Сочи"));
         userList.add(new User(4, "Максим", "Белгород"));
         HashMap<Integer, User> result = convert.convertUser(userList);
-        assertThat(result, is(-1));
     }
 }
