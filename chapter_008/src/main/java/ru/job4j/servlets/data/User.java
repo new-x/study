@@ -13,6 +13,8 @@ import java.util.Objects;
 public class User {
     private int id;
     private String login;
+    private String city;
+    private String country;
     private String password;
     private String name;
     private String email;
@@ -27,6 +29,28 @@ public class User {
         this.email = email;
         this.createDate = createDate;
         this.role = role;
+    }
+
+    public User(int id, String name, String login, String city, String country, String password, String email, Calendar createDate, Role role) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.city = city;
+        this.country = country;
+        this.password = password;
+        this.email = email;
+        this.createDate = createDate;
+        this.role = role;
+    }
+
+    public User(String name, String login, String city, String country, String password, String email, Calendar createDate) {
+        this.name = name;
+        this.login = login;
+        this.city = city;
+        this.country = country;
+        this.password = password;
+        this.email = email;
+        this.createDate = createDate;
     }
 
     public User(String name, String login, String password, String email, Calendar createDate) {
@@ -76,6 +100,14 @@ public class User {
 
     public Calendar getCreateDate() {
         return createDate;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
     }
 
     @Override

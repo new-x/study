@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-    <!--<filter>
+    <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.job4j.servlets.logic.AuthFilter</filter-class>
     </filter>
@@ -31,13 +31,12 @@
         <servlet-name>User Update Servlet</servlet-name>
         <servlet-class>ru.job4j.servlets.UserUpdateServlet</servlet-class>
         <load-on-startup>3</load-on-startup>
-    </servlet> -->
-    <servlet>
+    </servlet>
+    <!-- <servlet>
         <servlet-name>User General Servlet</servlet-name>
         <servlet-class>ru.job4j.servlets.GeneralServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
-    </servlet>
-<!--
+    </servlet> -->
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
         <url-pattern>/signin</url-pattern>
@@ -53,10 +52,10 @@
     <servlet-mapping>
         <servlet-name>User Update Servlet</servlet-name>
         <url-pattern>/edit</url-pattern>
-    </servlet-mapping> -->
-    <servlet-mapping>
-        <servlet-name>User General Servlet</servlet-name>
-        <url-pattern>/add</url-pattern>
     </servlet-mapping>
+    <!-- <servlet-mapping>
+         <servlet-name>User General Servlet</servlet-name>
+         <url-pattern>/add</url-pattern>
+     </servlet-mapping> -->
 </web-app>
 

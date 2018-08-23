@@ -1,0 +1,36 @@
+.center-login {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#parent {
+    display: table;
+    width: 20%;
+}
+
+#parent-list {
+    display: table;
+    margin-top: 5%;
+    width: 100%;
+}
+#form_login {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#right-button {
+    position: fixed;
+    bottom: 90%;
+    right: 5%;
+    top: 10px;
+}
+
+#left-button {
+    position: fixed;
+    bottom: 90%;
+    left: 5%;
+    top: 10px;
+}

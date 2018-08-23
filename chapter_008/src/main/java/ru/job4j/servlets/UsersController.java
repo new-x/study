@@ -3,6 +3,7 @@ package ru.job4j.servlets;
 import ru.job4j.servlets.data.Role;
 import ru.job4j.servlets.data.User;
 import ru.job4j.servlets.logic.ValidateService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,29 +37,59 @@ public class UsersController extends HttpServlet {
             session.invalidate();
         }
         if (request.getParameter("action").equals("add")) {
-            logic.add(new User(
-                    request.getParameter("name"),
+            if (checkUser(request.getParameter("name"),
                     request.getParameter("login"),
-                    request.getParameter("email"),
+                    request.getParameter("city"),
+                    request.getParameter("country"),
                     request.getParameter("password"),
-                    new GregorianCalendar()));
+                    request.getParameter("email"))) {
+                logic.add(new User(
+                        request.getParameter("name"),
+                        request.getParameter("login"),
+                        request.getParameter("city"),
+                        request.getParameter("country"),
+                        request.getParameter("password"),
+                        request.getParameter("email"),
+                        new GregorianCalendar()));
+            } else {
+                    request.setAttribute("error", "Invalid user data.");
+            }
         } else if (request.getParameter("action").equals("update")) {
-            logic.update(new User(
-                    Integer.parseInt(request.getParameter("id")),
-                    request.getParameter("name"),
+            if (checkUser(request.getParameter("name"),
                     request.getParameter("login"),
+                    request.getParameter("city"),
+                    request.getParameter("country"),
                     request.getParameter("password"),
-                    request.getParameter("email"),
-                    new GregorianCalendar(),
-                    new Role(Integer.parseInt(request.getParameter("roles_id")), "NewRole")));
+                    request.getParameter("email"))) {
+                logic.update(new User(
+                        Integer.parseInt(request.getParameter("id")),
+                        request.getParameter("name"),
+                        request.getParameter("login"),
+                        request.getParameter("city"),
+                        request.getParameter("country"),
+                        request.getParameter("password"),
+                        request.getParameter("email"),
+                        new GregorianCalendar(),
+                        new Role(Integer.parseInt(request.getParameter("roles_id")), "NewRole")));
+            } else {
+                request.setAttribute("error", "Invalid user data.");
+            }
         } else if (request.getParameter("action").equals("delete")) {
             logic.delete(Integer.parseInt(request.getParameter("id")));
         }
         response.sendRedirect(String.format("%s/", request.getContextPath()));
     }
 
-    public void checkRole() {
-
+    private boolean checkUser(String name, String login, String city, String country, String password, String email) {
+        boolean result = true;
+        if (name.equals("")
+                || login.equals("")
+                || city.equals("")
+                || country.equals("")
+                || password.equals("")
+                || email.equals("")) {
+            result = false;
+        }
+        return result;
     }
-
 }

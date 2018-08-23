@@ -52,13 +52,15 @@ public class DBStore implements Store {
     @Override
     public void add(User user) {
         try(Connection connection = SOURCE.getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into users (username, login, password, email, create_date, roles_id) values (?, ?, ?, ?, ?, ?)")) {
+            PreparedStatement statement = connection.prepareStatement("insert into users (username, login, city, country, password, email, create_date, roles_id) values (?, ?, ?, ?, ?, ?, ?, ?)")) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getEmail());
-            statement.setTimestamp(5, new Timestamp(user.getCreateDate().getTimeInMillis()));
-            statement.setInt(6, 2);
+            statement.setString(3, user.getCity());
+            statement.setString(4, user.getCountry());
+            statement.setString(5, user.getPassword());
+            statement.setString(6, user.getEmail());
+            statement.setTimestamp(7, new Timestamp(user.getCreateDate().getTimeInMillis()));
+            statement.setInt(8, 2);
             statement.execute();
         } catch (SQLException e) {
             Log.error(e.getMessage());
@@ -68,13 +70,15 @@ public class DBStore implements Store {
     @Override
     public void update(User user) {
         try(Connection connection = SOURCE.getConnection();
-            PreparedStatement statement = connection.prepareStatement("update users set username=?, login=?, password=?, email=?, roles_id=? where id=?")) {
+            PreparedStatement statement = connection.prepareStatement("update users set username=?, login=?, city=?, country=?, password=?, email=?, roles_id=? where id=?")) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getEmail());
-            statement.setInt(5, user.getRole().getId());
-            statement.setInt(6, user.getId());
+            statement.setString(3, user.getCity());
+            statement.setString(4, user.getCountry());
+            statement.setString(5, user.getPassword());
+            statement.setString(6, user.getEmail());
+            statement.setInt(7, user.getRole().getId());
+            statement.setInt(8, user.getId());
             statement.execute();
         } catch (SQLException e) {
             Log.error(e.getMessage());
@@ -104,6 +108,8 @@ public class DBStore implements Store {
                     allUsers.add(new User(resultSet.getInt("id"),
                             resultSet.getString("username"),
                             resultSet.getString("login"),
+                            resultSet.getString("city"),
+                            resultSet.getString("country"),
                             resultSet.getString("password"),
                             resultSet.getString("email"),
                             calendar,
@@ -132,6 +138,8 @@ public class DBStore implements Store {
                         user = new User(resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("login"),
+                                resultSet.getString("city"),
+                                resultSet.getString("country"),
                                 resultSet.getString("password"),
                                 resultSet.getString("email"),
                                 calendar,
