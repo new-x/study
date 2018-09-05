@@ -25,6 +25,7 @@
         <module>testquest1</module>
         <module>bombermen</module>
         <module>parserjobs</module>
+        <module>musicbox</module>
     </modules>
 
     <dependencies>

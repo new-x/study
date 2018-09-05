@@ -65,4 +65,14 @@ public class MemoryStore implements Store {
     public List<Role> getAllRoles() {
         return null;
     }
+
+    @Override
+    public List<String> getAllCountrys() {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllCitys(String country) {
+        return null;
+    }
 }

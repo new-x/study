@@ -20,9 +20,11 @@
     </style>
     <script type="application/javascript">
         <%@ include file="/src/script.js" %>
+        <%@ include file="/src/getcountry.js" %>
     </script>
 </head>
 <body>
+<c:if test="${sessionScope.user.role.id == 1}">
 <div class="container">
     <form action="<%=request.getContextPath()%>/" method="POST" onsubmit="return checkAddUser()">
         <input type="hidden" name="action" value="update"/>
@@ -36,20 +38,23 @@
             <input type="text" class="form-control" name="login" id="login" value="${user.login}"><br>
         </div>
         <div class="form-group">
-            <label><b>New City</b></label>
-            <input type="text" class="form-control" name="city" id="city" value="${user.city}"><br>
-        </div>
-        <div class="form-group">
-            <label><b>New Country</b></label>
-            <input type="text" class="form-control" name="country" id="country" value="${user.country}"><br>
-        </div>
-        <div class="form-group">
             <label><b>New Password</b></label>
             <input type="password" class="form-control" name="password" id="password" value="${user.password}"><br>
         </div>
         <div class="form-group">
             <label><b>New Email</b></label>
             <input type="email" class="form-control" name="email" id="email" value="${user.email}"><br>
+        </div>
+        <div class="form-group">
+            <label for="selectCountry">New Country:</label>
+            <select class="form-control" id="selectCountry" name="country" onchange="getCityByCountry()">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selectCity">New City:</label>
+            <select class="form-control" id="selectCity" name="city">
+
+            </select>
         </div>
         <div class="form-group">
             <c:if test="${user.role.id == 1}">
@@ -64,5 +69,6 @@
         <button type="submit" class="btn btn-default">Edit User</button>
     </form>
 </div>
+</c:if>
 </body>
 </html>

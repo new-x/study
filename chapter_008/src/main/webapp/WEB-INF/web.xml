@@ -32,6 +32,11 @@
         <servlet-class>ru.job4j.servlets.UserUpdateServlet</servlet-class>
         <load-on-startup>3</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>User Address Servlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.AddressController</servlet-class>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
     <!-- <servlet>
         <servlet-name>User General Servlet</servlet-name>
         <servlet-class>ru.job4j.servlets.GeneralServlet</servlet-class>
@@ -52,6 +57,10 @@
     <servlet-mapping>
         <servlet-name>User Update Servlet</servlet-name>
         <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User Address Servlet</servlet-name>
+        <url-pattern>/address</url-pattern>
     </servlet-mapping>
     <!-- <servlet-mapping>
          <servlet-name>User General Servlet</servlet-name>

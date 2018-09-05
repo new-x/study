@@ -72,4 +72,15 @@ public class ValidateService {
         }
         return result;
     }
+
+    public List<String> getAllCountrys() {
+        return store.getAllCountrys();
+    }
+
+    public List<String> getAllCities(String country) {
+        if (country != null) {
+            return store.getAllCitys(country);
+        }
+        throw new NullPointerException("Country is" + country);
+    }
 }

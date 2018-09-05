@@ -22,4 +22,8 @@ public interface Store {
     public User findByLogin(String login);
 
     public List<Role> getAllRoles();
+
+    public List<String> getAllCountrys();
+
+    public List<String> getAllCitys(String country);
 }

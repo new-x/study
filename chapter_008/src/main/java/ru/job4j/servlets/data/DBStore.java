@@ -115,8 +115,6 @@ public class DBStore implements Store {
                             calendar,
                             new Role(resultSet.getInt("roles_id"), resultSet.getString("rolename"))));
                 }
-            } catch (SQLException e) {
-                Log.error(e.getMessage());
             }
         } catch (SQLException e) {
             Log.error(e.getMessage());
@@ -146,8 +144,6 @@ public class DBStore implements Store {
                                 new Role(resultSet.getInt("roles_id"), resultSet.getString("rolename")));
                     }
                 }
-            }catch (SQLException e) {
-                Log.error(e.getMessage());
             }
         } catch (SQLException e) {
             Log.error(e.getMessage());
@@ -175,8 +171,6 @@ public class DBStore implements Store {
                                 new Role(resultSet.getInt("roles_id"), resultSet.getString("rolename")));
                     }
                 }
-            }catch (SQLException e) {
-                Log.error(e.getMessage());
             }
         } catch (SQLException e) {
             Log.error(e.getMessage());
@@ -194,12 +188,45 @@ public class DBStore implements Store {
                    allUsers.add(new Role(resultSet.getInt("id"),
                            resultSet.getString("rolename")));
                }
-           } catch (SQLException e) {
-               Log.error(e.getMessage());
            }
         } catch (SQLException e) {
             Log.error(e.getMessage());
         }
         return allUsers;
     }
+
+    @Override
+    public List<String> getAllCountrys() {
+        List<String> allCountrys = new ArrayList<>();
+        try(Connection connection = SOURCE.getConnection();
+            PreparedStatement statement = connection.prepareStatement("select * from country")) {
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    allCountrys.add(resultSet.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage());
+        }
+        return allCountrys;
+    }
+
+    @Override
+    public List<String> getAllCitys(String country) {
+        List<String> allCities = new ArrayList<>();
+        try(Connection connection = SOURCE.getConnection();
+            PreparedStatement statement = connection.prepareStatement("select name from city where country_id = (select id from country where name = ?)")) {
+            statement.setString(1, country);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    allCities.add(resultSet.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            Log.error(e.getMessage());
+        }
+        return allCities;
+    }
+
+
 }

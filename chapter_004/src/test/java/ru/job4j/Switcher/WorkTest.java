@@ -17,6 +17,6 @@ public class WorkTest {
         Thread workTwo = new Thread(new Work(2, switcher));
         workOne.start();
         workTwo.start();
-        workTwo.join();
+       // workTwo.join();
     }
 }

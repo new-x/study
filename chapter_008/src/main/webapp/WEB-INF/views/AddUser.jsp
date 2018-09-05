@@ -20,6 +20,7 @@
     </style>
     <script type="application/javascript">
         <%@ include file="/src/script.js" %>
+        <%@ include file="/src/getcountry.js" %>
     </script>
 </head>
 <body>
@@ -36,20 +37,21 @@
                 <input type="text" class="form-control" placeholder="Enter user Login" name="login" id="login"><br>
             </div>
             <div class="form-group">
-                <label><b>City</b></label>
-                <input type="text" class="form-control" placeholder="Enter user City" name="city" id="city"><br>
-            </div>
-            <div class="form-group">
-                <label><b>Country</b></label>
-                <input type="text" class="form-control" placeholder="Enter user Country" name="country" id="country"><br>
-            </div>
-            <div class="form-group">
                 <label><b>Password</b></label>
-                <input type="password" class="form-control" placeholder="Enter user Password" name="password" id="password"><br>
+                <input type="password" class="form-control" placeholder="Enter user Password" name="password"
+                       id="password"><br>
             </div>
             <div class="form-group">
                 <label><b>Email</b></label>
                 <input type="email" class="form-control" placeholder="Enter user Email" name="email" id="email"><br>
+            </div>
+            <div class="form-group">
+                <label for="selectCountry">Country:</label>
+                <select class="form-control" id="selectCountry" name="country" onchange="getCityByCountry()"></select>
+            </div>
+            <div class="form-group">
+                <label for="selectCity">City:</label>
+                <select class="form-control" id="selectCity" name="city"></select>
             </div>
             <button type="submit" class="btn btn-default">Create User</button>
         </form>
