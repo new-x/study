@@ -8,7 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class Data {
     private static final SessionFactory SESSION_FACTORY;
-    public static Data INSTANCE = new Data();
+    public static final Data INSTANCE = new Data();
 
     static {
         try {

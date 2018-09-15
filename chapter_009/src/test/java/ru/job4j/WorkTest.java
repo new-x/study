@@ -16,20 +16,30 @@ public class WorkTest {
     @Test
     public void tesAddItem() {
         Item item = new Item(0, "NoteOne", false, new Timestamp(calendar.getTimeInMillis()));
-        work.addItem(item);
-        item = work.getItem(item);
-        assertTrue(work.getItem(item).getDescription().equals(item.getDescription()));
-        work.deleteItem(item);
+        try {
+            work.addItem(item);
+            item = work.getItem(item);
+            assertTrue(work.getItem(item).getDescription().equals(item.getDescription()));
+        }finally {
+            work.deleteItem(item);
+        }
+
+
     }
 
     @Test
     public void updateItem() {
         Item item = new Item(0, "NoteTwo", false, new Timestamp(calendar.getTimeInMillis()));
-        work.addItem(item);
-        item = work.getItem(item);
-        item.setDone(true);
-        work.updateItem(item);
-        assertTrue(work.getItem(item).isDone() == item.isDone());
+        try {
+            work.addItem(item);
+            item = work.getItem(item);
+            item.setDone(true);
+            System.out.println(item.isDone());
+            work.updateItem(item);
+            assertTrue(work.getItem(item).isDone() == item.isDone());
+        } finally {
+            work.deleteItem(item);
+        }
     }
 
     @Test
