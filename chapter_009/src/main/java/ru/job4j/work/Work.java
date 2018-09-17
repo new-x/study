@@ -21,7 +21,7 @@ public class Work {
     }
 
     private <T> T tx(Function<Session, T> command) {
-        final Session session = data.getSessionFactory().openSession();
+        final Session session = data.getSession();
         final Transaction transaction = session.beginTransaction();
         T result = null;
         try {

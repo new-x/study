@@ -1,5 +1,6 @@
 package ru.job4j.data;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -25,8 +26,8 @@ public class Data {
         return INSTANCE;
     }
 
-    public SessionFactory getSessionFactory() {
-        return SESSION_FACTORY;
+    public Session getSession() {
+        return SESSION_FACTORY.openSession();
     }
 
     public void close() {
