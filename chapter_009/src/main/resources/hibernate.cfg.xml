@@ -8,5 +8,13 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="show_sql">true</property>
         <mapping resource="ru/job4j/models/Item.hbm.xml"/>
+        <mapping resource="ru/job4j/car/models/onxml/Car.hbm.xml"/>
+        <mapping resource="ru/job4j/car/models/onxml/Body.hbm.xml"/>
+        <mapping resource="ru/job4j/car/models/onxml/Engine.hbm.xml"/>
+        <mapping resource="ru/job4j/car/models/onxml/Transmission.hbm.xml"/>
+        <mapping class="ru.job4j.car.models.onannotation.ACar"/>
+        <mapping class="ru.job4j.car.models.onannotation.ABody"/>
+        <mapping class="ru.job4j.car.models.onannotation.AEngine"/>
+        <mapping class="ru.job4j.car.models.onannotation.ATransmission"/>
     </session-factory>
 </hibernate-configuration>
