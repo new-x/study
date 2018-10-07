@@ -7,14 +7,15 @@
         <property name="connection.password">postgres</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="show_sql">true</property>
-        <mapping resource="ru/job4j/models/Item.hbm.xml"/>
-        <mapping resource="ru/job4j/car/models/onxml/Car.hbm.xml"/>
-        <mapping resource="ru/job4j/car/models/onxml/Body.hbm.xml"/>
-        <mapping resource="ru/job4j/car/models/onxml/Engine.hbm.xml"/>
-        <mapping resource="ru/job4j/car/models/onxml/Transmission.hbm.xml"/>
-        <mapping class="ru.job4j.car.models.onannotation.ACar"/>
-        <mapping class="ru.job4j.car.models.onannotation.ABody"/>
-        <mapping class="ru.job4j.car.models.onannotation.AEngine"/>
-        <mapping class="ru.job4j.car.models.onannotation.ATransmission"/>
+        <mapping class="ru.job4j.car.models.User"/>
+        <mapping class="ru.job4j.car.models.Role"/>
+        <mapping class="ru.job4j.car.models.Ad"/>
+        <mapping class="ru.job4j.car.models.Car"/>
+        <mapping class="ru.job4j.car.models.Transmission"/>
+        <mapping class="ru.job4j.car.models.Engine"/>
+        <mapping class="ru.job4j.car.models.Color"/>
+        <mapping class="ru.job4j.car.models.Car"/>
+        <mapping class="ru.job4j.car.models.Body"/>
+        <mapping class="ru.job4j.car.models.Brand"/>
     </session-factory>
 </hibernate-configuration>

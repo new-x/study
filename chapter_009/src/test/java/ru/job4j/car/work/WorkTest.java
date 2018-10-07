@@ -48,8 +48,8 @@ public class WorkTest {
             session.createQuery("delete from Car where name= 'carTest'").executeUpdate();
             session.createQuery("delete from Car where name= 'carNameTestUpdate'").executeUpdate();
             session.createQuery("delete from Body where color = 'bodyTest'").executeUpdate();
-            session.createQuery("delete from Engine where type= 'engineTest'").executeUpdate();
-            session.createQuery("delete from Transmission where type= 'transmissionTest'").executeUpdate();
+            session.createQuery("delete from Engine where name= 'engineTest'").executeUpdate();
+            session.createQuery("delete from Transmission where name= 'transmissionTest'").executeUpdate();
 
             return null;
         });

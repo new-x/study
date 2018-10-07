@@ -5,13 +5,53 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <servlet>
-        <servlet-name>ToDoList</servlet-name>
-        <servlet-class>ru.job4j.servlets.GeneralServelet</servlet-class>
+        <servlet-name>CarPlatfrom</servlet-name>
+        <servlet-class>ru.job4j.servlets.PlatformServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ToDoList</servlet-name>
+        <servlet-name>CarPlatfrom</servlet-name>
         <url-pattern>/general</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.AuthServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.AddServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.ChangeServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeServlet</servlet-name>
+        <url-pattern>/change</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.UploadServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/file</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -20,8 +60,8 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-    <servlet-name>ToDoListUpdate</servlet-name>
-    <url-pattern>/update</url-pattern>
+        <servlet-name>ToDoListUpdate</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>ru.job4j.listner.ContextListner</listener-class>
