@@ -47,8 +47,8 @@ public class Logic<T extends CarModel> {
         return result;
     }
 
-    public List<Ad> getAllAds() {
-        return worker.getAllAds();
+    public List<Ad> getAllAds(Filter filter) {
+        return worker.getAllAds(filter);
     }
 
     public List<Car> getAllCars() {

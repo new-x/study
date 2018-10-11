@@ -23,6 +23,15 @@
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>FilterServlet</servlet-name>
+        <servlet-class>ru.job4j.servlets.FilterServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FilterServlet</servlet-name>
+        <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>AddServlet</servlet-name>

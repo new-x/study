@@ -1,6 +1,7 @@
 package ru.job4j.car.models;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "Ad")
@@ -21,6 +22,9 @@ public class Ad {
     private boolean done;
     @Column(name = "description")
     private String description;
+    @Column(name = "create_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar calendar;
 
     public Ad() {
     }
@@ -80,6 +84,14 @@ public class Ad {
         this.description = description;
     }
 
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+
     @Override
     public String toString() {
         return "Ad{" +
@@ -89,6 +101,7 @@ public class Ad {
                 ", price=" + price +
                 ", done=" + done +
                 ", description='" + description + '\'' +
+                ", calendar=" + calendar +
                 '}';
     }
 }

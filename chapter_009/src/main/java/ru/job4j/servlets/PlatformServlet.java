@@ -7,6 +7,7 @@ import ru.job4j.TransactionWrapper;
 import ru.job4j.car.logic.Logic;
 import ru.job4j.car.models.Ad;
 import ru.job4j.car.models.Auth;
+import ru.job4j.car.models.Filter;
 import ru.job4j.car.models.User;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class PlatformServlet extends HttpServlet {
                 CONVERTER.writeValue(writer, logic.getAll(request.getParameter("action")));
             }
         } else {
-            CONVERTER.writeValue(writer, logic.getAllAds());
+            CONVERTER.writeValue(writer, logic.getAllAds(new Filter()));
         }
         writer.flush();
     }

@@ -1,6 +1,6 @@
 $(
     getButtons()
-)
+);
 
 function getButtons() {
     $.ajax({
