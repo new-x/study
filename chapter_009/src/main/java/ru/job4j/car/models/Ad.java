@@ -29,11 +29,12 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(User user, Car car, Integer price, String description) {
+    public Ad(User user, Car car, Integer price, String description, Calendar calendar) {
         this.user = user;
         this.car = car;
         this.price = price;
         this.description = description;
+        this.calendar = calendar;
     }
 
     public int getId() {

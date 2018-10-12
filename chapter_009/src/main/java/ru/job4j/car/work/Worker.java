@@ -20,8 +20,8 @@ public class Worker<T extends CarModel> {
         this.transactionWrapper = transactionWrapper;
     }
 
-    public void addOrUpdateAd(Ad ad) {
-        this.transactionWrapper.writeAndExecute(session -> {
+    public int addOrUpdateAd(Ad ad) {
+        return this.transactionWrapper.writeAndExecute(session -> {
             session.saveOrUpdate(ad);
             return ad.getId();
         });
@@ -69,23 +69,5 @@ public class Worker<T extends CarModel> {
 
     public Ad getAdById(Ad ad) {
         return this.transactionWrapper.writeAndExecute(session -> session.get(Ad.class, ad.getId()));
-    }
-
-    public List<Ad> findByFilter(Filter filter) {
-        return this.transactionWrapper.writeAndExecute(session ->
-                session.createQuery("from Ad where" +
-                        "(true = :checkDateFirst or (:dateFilterFirst < calendar)) and " +
-                        "(true  = :checkDateSecond or (:dateFilterSecond > calendar)) and " +
-                        "(true = :brandCheck or (:brandFilter = car.brand)) and " +
-                        "(true = :filterPhoto or (car.image is not null))", Ad.class)
-                        .setParameter("checkDateFirst", filter.getCalendarFirst() == null)
-                        .setParameter("dateFilterFirst", filter.getCalendarFirst())
-                        .setParameter("checkDateSecond", filter.getCalendarSecond() == null)
-                        .setParameter("dateFilterSecond", filter.getCalendarSecond())
-                        .setParameter("brandCheck", filter.getBrand() == null)
-                        .setParameter("brandFilter", filter.getBrand())
-                        .setParameter("filterPhoto", !filter.isWithPhoto())
-                        .list()
-        );
     }
 }
