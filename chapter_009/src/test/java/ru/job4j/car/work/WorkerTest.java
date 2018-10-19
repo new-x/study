@@ -1,10 +1,7 @@
 package ru.job4j.car.work;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.TransactionWrapper;
 import ru.job4j.car.CarModel;
 import ru.job4j.car.logic.Logic;
 import ru.job4j.car.models.*;
@@ -14,13 +11,11 @@ import java.util.Calendar;
 import static org.junit.Assert.assertTrue;
 
 public class WorkerTest<T extends CarModel> {
-    private TransactionWrapper transactionWrapper;
     private Logic logic;
 
     @Before
     public void init() {
-        this.transactionWrapper = new TransactionWrapper();
-        this.logic = new Logic(this.transactionWrapper);
+        this.logic = new Logic();
     }
 
     @Test
@@ -40,8 +35,8 @@ public class WorkerTest<T extends CarModel> {
         Calendar calendar = Calendar.getInstance();
         Car car = new Car(brand, color, body, engine, transmission);
         Ad ad = new Ad(user, car, 100, "About car.", calendar);
-        logic.addOrUpdateAd(ad);
-        assertTrue(logic.getAddById(ad).getId() == ad.getId());
+        logic.addOrUpdate(ad);
+        assertTrue(logic.getById(ad).getId() == ad.getId());
     }
 
     @Test
@@ -78,9 +73,9 @@ public class WorkerTest<T extends CarModel> {
         Calendar calendar = Calendar.getInstance();
         Car car = new Car(brand, color, body, engine, transmission);
         Ad ad = new Ad(user, car, 100, "About car.", calendar);
-        logic.addOrUpdateAd(ad);
+        logic.addOrUpdate(ad);
         ad.setDone(true);
-        logic.addOrUpdateAd(ad);
-        assertTrue(logic.getAddById(ad).isDone() == ad.isDone());
+        logic.addOrUpdate(ad);
+        assertTrue(((Ad) logic.getById(ad)).isDone() == ad.isDone());
     }
 }

@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.job4j.TransactionWrapper;
+import ru.job4j.car.ControllerDAO;
 import ru.job4j.car.logic.Logic;
 import ru.job4j.car.models.Ad;
 import ru.job4j.car.models.User;
+import ru.job4j.car.work.AdDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,7 @@ import java.io.PrintWriter;
 public class AddServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(AddServlet.class);
     private final ObjectMapper CONVERTER = new ObjectMapper();
-    private final Logic logic = new Logic(new TransactionWrapper());
+    private final Logic logic = new Logic();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +29,7 @@ public class AddServlet extends HttpServlet {
         Ad ad = CONVERTER.readValue(request.getReader(), Ad.class);
         if (request.getSession().getAttribute("login") != null && ad != null) {
             ad.setUser(logic.getUserByLogin(new User((String) request.getSession().getAttribute("login"))));
-            logic.addOrUpdateAd(ad);
+            logic.addOrUpdate(ad);
         }
         writer.flush();
     }

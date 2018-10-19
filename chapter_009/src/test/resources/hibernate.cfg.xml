@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:hsqldb:mem:сarcatalog;sql.enforce_size=false</property>
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"></property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="ru.job4j.car.models.User"/>
+        <mapping class="ru.job4j.car.models.Role"/>
+        <mapping class="ru.job4j.car.models.Ad"/>
+        <mapping class="ru.job4j.car.models.Car"/>
+        <mapping class="ru.job4j.car.models.Transmission"/>
+        <mapping class="ru.job4j.car.models.Engine"/>
+        <mapping class="ru.job4j.car.models.Color"/>
+        <mapping class="ru.job4j.car.models.Car"/>
+        <mapping class="ru.job4j.car.models.Body"/>
+        <mapping class="ru.job4j.car.models.Brand"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,11 +1,14 @@
 package ru.job4j.car.models;
 
+import ru.job4j.car.CarPlatform;
+
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Ad")
-public class Ad {
+public class Ad implements CarPlatform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -91,6 +94,26 @@ public class Ad {
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ad ad = (Ad) o;
+        return id == ad.id &&
+                done == ad.done &&
+                Objects.equals(user, ad.user) &&
+                Objects.equals(car, ad.car) &&
+                Objects.equals(price, ad.price) &&
+                Objects.equals(description, ad.description) &&
+                Objects.equals(calendar, ad.calendar);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, user, car, price, done, description, calendar);
     }
 
     @Override

@@ -18,15 +18,17 @@ import java.io.PrintWriter;
 public class FilterServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(PlatformServlet.class);
     private final ObjectMapper CONVERTER = new ObjectMapper();
-    private final Logic logic = new Logic(new TransactionWrapper());
+    private final Logic logic = new Logic();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
         Filter filter = CONVERTER.readValue(request.getReader(), Filter.class);
-        LOGGER.info(filter);
-        CONVERTER.writeValue(writer, logic.getAllAds(filter));
+        if(filter.getBrand().getId() == 0) {
+            filter.setBrand(null);
+        }
+        CONVERTER.writeValue(writer, logic.getAllAdsByFilter(filter));
         writer.flush();
     }
 }

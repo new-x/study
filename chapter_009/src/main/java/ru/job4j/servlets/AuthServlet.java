@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 import ru.job4j.TransactionWrapper;
 import ru.job4j.car.logic.Logic;
 import ru.job4j.car.models.Auth;
-import ru.job4j.car.models.User;
-import ru.job4j.car.work.Worker;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ import java.io.PrintWriter;
 public class AuthServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(PlatformServlet.class);
     private final ObjectMapper CONVERTER = new ObjectMapper();
-    private final Logic logic = new Logic(new TransactionWrapper());
+    private final Logic logic = new Logic();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +33,6 @@ public class AuthServlet extends HttpServlet {
         }
         CONVERTER.writeValue(writer, outAuth);
         writer.flush();
-
     }
 
     @Override

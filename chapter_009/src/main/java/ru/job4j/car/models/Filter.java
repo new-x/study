@@ -2,7 +2,7 @@ package ru.job4j.car.models;
 
 import java.util.Calendar;
 
-public class Filter {
+public class Filter  {
     private Brand brand;
     private boolean withPhoto;
     private Calendar calendarFirst;

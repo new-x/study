@@ -2,12 +2,14 @@ package ru.job4j.car.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.job4j.car.CarModel;
+import ru.job4j.car.CarPlatform;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "transmission")
-public class Transmission implements CarModel {
+public class Transmission implements CarPlatform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -35,6 +37,21 @@ public class Transmission implements CarModel {
 
     public void setName(String type) {
         this.name = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transmission that = (Transmission) o;
+        return id == that.id &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name);
     }
 
     @Override

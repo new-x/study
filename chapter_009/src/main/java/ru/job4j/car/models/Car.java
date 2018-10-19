@@ -1,10 +1,13 @@
 package ru.job4j.car.models;
 
+import ru.job4j.car.CarPlatform;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "car")
-public class Car {
+public class Car implements CarPlatform {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,6 +97,26 @@ public class Car {
 
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return id == car.id &&
+                Objects.equals(image, car.image) &&
+                Objects.equals(brand, car.brand) &&
+                Objects.equals(color, car.color) &&
+                Objects.equals(body, car.body) &&
+                Objects.equals(engine, car.engine) &&
+                Objects.equals(transmission, car.transmission);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, image, brand, color, body, engine, transmission);
     }
 
     @Override

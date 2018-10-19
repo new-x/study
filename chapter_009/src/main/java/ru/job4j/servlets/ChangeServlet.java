@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 public class ChangeServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(AddServlet.class);
     private final ObjectMapper CONVERTER = new ObjectMapper();
-    private final Logic logic = new Logic(new TransactionWrapper());
+    private final Logic logic = new Logic();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,9 +28,9 @@ public class ChangeServlet extends HttpServlet {
         if (request.getSession().getAttribute("login") != null && ad != null) {
             User user = new User((String) request.getSession().getAttribute("login"));
             if (logic.checkAdByUser(ad, user)){
-                ad = logic.getAddById(ad);
+                ad = (Ad) logic.getById(ad);
                 ad.setDone(true);
-                logic.addOrUpdateAd(ad);
+                logic.addOrUpdate(ad);
             }
         }
         writer.flush();

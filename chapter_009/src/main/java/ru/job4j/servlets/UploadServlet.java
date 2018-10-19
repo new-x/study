@@ -25,7 +25,7 @@ public class UploadServlet extends HttpServlet {
     private Random random = new Random(System.currentTimeMillis());
     private static final Logger LOGGER = LogManager.getLogger(AddServlet.class);
     private final ObjectMapper CONVERTER = new ObjectMapper();
-    private final Logic logic = new Logic(new TransactionWrapper());
+    private final Logic logic = new Logic();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

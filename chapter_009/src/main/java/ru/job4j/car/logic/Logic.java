@@ -2,62 +2,65 @@ package ru.job4j.car.logic;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.job4j.TransactionWrapper;
-import ru.job4j.car.CarModel;
+import ru.job4j.car.CarPlatform;
+import ru.job4j.car.ControllerDAO;
 import ru.job4j.car.models.*;
-import ru.job4j.car.work.Worker;
+import ru.job4j.car.work.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class Logic<T extends CarModel> {
+public class Logic<T extends CarPlatform> {
     private static final Logger LOGGER = LogManager.getLogger(Logic.class);
-    private final Worker worker;
+    private final AdDAO adDAO;
+    private final UserDAO userDAO;
+    private final RoleDAO roleDAO;
+    private final CarDAO carDAO;
+    private final ControllerDAO controllerDAO = new ControllerDAO() {};
 
-    public Logic(TransactionWrapper transactionWrapper) {
-        this.worker = new Worker(transactionWrapper);
+    public Logic() {
+        this.adDAO = AdDAO.getINSTANCE();
+        this.userDAO = UserDAO.getINSTANCE();
+        this.roleDAO = RoleDAO.getINSTANCE();
+        this.carDAO = CarDAO.getINSTANCE();
     }
 
-    public void addOrUpdateAd(Ad ad) {
-        if (ad != null) {
-            worker.addOrUpdateAd(ad);
+    public List<T> getAll(T object) {
+            return this.controllerDAO.getAll(object);
+    }
+
+    public void addOrUpdate(T object) {
+        if (object != null) {
+            this.controllerDAO.addOrUpdate(object);
         }
     }
 
-    public Ad getAddById(Ad ad) {
-        if (ad.getId() != 0) {
-            ad = worker.getAdById(ad);
+    public T getById(T object) {
+        if (object.getId() != 0) {
+            object = (T) this.controllerDAO.getById(object);
         }
-        return ad;
+        return object;
     }
 
-    public List<T> getAll(String type) {
+    public List<T> getAllByType(String type) {
         List<T> result = null;
         if (type.equals("body")) {
-            result = worker.getAll(new Body());
+            result = this.controllerDAO.getAll(new Body());
         } else if (type.equals("brand")) {
-            result = worker.getAll(new Brand());
+            result = this.controllerDAO.getAll(new Brand());
         } else if (type.equals("color")) {
-            result = worker.getAll(new Color());
+            result = this.controllerDAO.getAll(new Color());
         } else if (type.equals("engine")) {
-            result = worker.getAll(new Engine());
+            result = this.controllerDAO.getAll(new Engine());
         } else if (type.equals("transmission")) {
-            result = worker.getAll(new Transmission());
+            result = this.controllerDAO.getAll(new Transmission());
         }
         return result;
     }
 
-    public List<Ad> getAllAds(Filter filter) {
-        return worker.getAllAds(filter);
-    }
-
-    public List<Car> getAllCars() {
-        return worker.getAllCars();
-    }
-
     public User getUserByLogin(User user) {
         if (user.getLogin() != null) {
-            return worker.getUserByLogin(user);
+            return this.userDAO.getUserByLogin(user.getLogin());
         }
         return null;
     }
@@ -67,7 +70,7 @@ public class Logic<T extends CarModel> {
         if (session.getAttribute("login") == null) {
             if (auth.getMessage().equals("authUser")) {
                 if (auth.getLogin() != null) {
-                    User user = worker.getUserByLogin(new User(auth.getLogin()));
+                    User user = this.userDAO.getUserByLogin(auth.getLogin());
                     if (user != null) {
                         if (user.getPassword().equals(auth.getPassword())) {
                             session.setAttribute("login", user.getLogin());
@@ -95,10 +98,14 @@ public class Logic<T extends CarModel> {
     public boolean checkAdByUser(Ad ad, User user) {
         boolean result = false;
         if (user.getLogin() != null) {
-            if (worker.getAdById(ad).getUser().getId() == worker.getUserByLogin(user).getId()) {
+            if (((Ad) this.controllerDAO.getById(ad)).getUser().getId() == this.userDAO.getUserByLogin(user.getLogin()).getId()) {
                 result = true;
             }
         }
         return result;
     }
+
+    public List<Ad> getAllAdsByFilter(Filter filter){
+        return adDAO.getAllAdsByFilter(filter);
+    };
 }

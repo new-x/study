@@ -75,7 +75,6 @@ function getAllTypes() {
     getTypes('selectColor','color');
     getTypes('selectEngine','engine');
     getTypes('selectTransmissions','transmission');
-    getAllAds()
 }
 
 function getTypes(button, type) {
@@ -85,7 +84,7 @@ function getTypes(button, type) {
         data: {action: type},
         complete: function (data) {
             var list = JSON.parse(data.responseText);
-            var result;
+            var result = "<option value=\""+ 0 +"\"></option>";
             for (var index = 0; index < list.length; index++) {
                 result+= "<option value=\"" + list[index].id + "\">" + list[index].name + "</option>"
             }

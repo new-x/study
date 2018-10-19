@@ -12,6 +12,11 @@ import java.util.function.Function;
 public class TransactionWrapper {
     private static final Data data = Data.getINSTANCE();
     private static final Logger LOGGER = LogManager.getLogger(TransactionWrapper.class);
+    private static final TransactionWrapper INSTANCE = new TransactionWrapper();
+
+    public static TransactionWrapper getINSTANCE() {
+        return INSTANCE;
+    }
 
     public  <T> T writeAndExecute(Function<Session, T> command) {
         final Session session = data.getSession();
