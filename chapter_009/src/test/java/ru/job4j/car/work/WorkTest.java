@@ -50,7 +50,6 @@ public class WorkTest {
             session.createQuery("delete from Body where color = 'bodyTest'").executeUpdate();
             session.createQuery("delete from Engine where name= 'engineTest'").executeUpdate();
             session.createQuery("delete from Transmission where name= 'transmissionTest'").executeUpdate();
-
             return null;
         });
 

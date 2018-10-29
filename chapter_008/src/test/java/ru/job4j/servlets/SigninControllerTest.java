@@ -13,13 +13,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 /**
  * Created by Alekseev Kirill.
  * Package name: ru.job4j.servlets
  * Create data: 07.08.2018 14:00
  */
 
-public class SigninControllerTest extends Mockito {
+public class SigninControllerTest {
     private DBStore store = DBStore.getInstance();
     @Test
     public void testSignInSessionByLogin() throws ServletException, IOException {
@@ -28,7 +32,7 @@ public class SigninControllerTest extends Mockito {
         HttpSession session = mock(HttpSession.class);
         try {
 
-            User user = new User(1,"Maxim", "maxim", "maxim", "maxim@mail.ru", new GregorianCalendar(), new Role(1, "Administrator"));
+            User user = new User(1,"Maxim", "maxim", "Moscow", "Russia", "maxim", "maxim@mail.ru", new GregorianCalendar(), new Role(1, "Administrator"));
             store.add(user);
 
             when(request.getParameter("login")).thenReturn("maxim");
