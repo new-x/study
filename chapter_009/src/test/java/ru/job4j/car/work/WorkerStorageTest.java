@@ -1,6 +1,7 @@
 package ru.job4j.car.work;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.TransactionWrapper;
 import ru.job4j.car.models.*;
@@ -56,12 +57,12 @@ public class WorkerStorageTest {
         this.adDAO.addOrUpdate(this.ad);
     }
 
-
+    @Ignore
     @Test
     public void getUserByLogin() {
         assertTrue(this.userDAO.getUserByLogin(user.getLogin()).getLogin().equals("root"));
     }
-
+    @Ignore
     @Test
     public void getAllByFilter() {
         Filter filter = new Filter();
