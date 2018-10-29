@@ -3,6 +3,13 @@ language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+before_script:
+  - psql -c 'create database testbase;' -U postgres
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
