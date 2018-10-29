@@ -1,6 +1,7 @@
 package ru.job4j.Threads;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertThat;
  */
 
 public class ParallelSearchTest {
+    @Ignore
     @Test
     public void testMethod() throws IOException, InterruptedException {
         Path root = Paths.get("C:\\Storage\\Java\\study\\chapter_004\\src\\main\\java\\ru\\job4j\\Threads\\files");
