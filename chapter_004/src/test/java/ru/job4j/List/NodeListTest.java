@@ -88,7 +88,8 @@ public class NodeListTest {
         assertThat(it.next(), is("Два"));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is("Три"));
-        assertThat(it.hasNext(), is(false));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("Один"));
     }
     @Test
     public void whenIsDublicate() {
