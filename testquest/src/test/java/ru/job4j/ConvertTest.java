@@ -14,6 +14,8 @@ public class ConvertTest {
         Node tmp = new Node(1, 2, 3);
         Convert convert = new Convert();
         Node expected = convert.convert(root);
-        assertThat(expected, is(tmp));
+        assertThat(expected.valueOne, is(tmp.valueOne));
+        assertThat(expected.valueTwo, is(tmp.valueTwo));
+        assertThat(expected.valueThree, is(tmp.valueThree));
     }
 }
