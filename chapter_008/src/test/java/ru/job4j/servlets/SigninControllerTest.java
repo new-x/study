@@ -1,5 +1,6 @@
 package ru.job4j.servlets;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ru.job4j.servlets.data.DBStore;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 public class SigninControllerTest {
     private DBStore store = DBStore.getInstance();
+    @Ignore
     @Test
     public void testSignInSessionByLogin() throws ServletException, IOException {
         HttpServletResponse response = mock(HttpServletResponse.class);
