@@ -1,5 +1,6 @@
 package ru.job4j.Threads;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertThat;
 
 
 public class UserStorageTest {
+    @Ignore
     @Test
     public void whenAddDeleteUpdateObjectTrue() {
         final UserStorage<User> storage = new UserStorage();
