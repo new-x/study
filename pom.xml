@@ -28,6 +28,7 @@
         <module>testquest2</module>
         <module>bombermen</module>
         <module>parserjobs</module>
+        <module>scratch</module>
     </modules>
 
     <dependencies>
