@@ -1,6 +1,6 @@
-package ru.scratch;
+package ru.merge;
 
-/*
+/**
  * Merge Sorter
  * @author Alexeev Kirill
  * @version $Id$
@@ -8,6 +8,12 @@ package ru.scratch;
  */
 
 public class MergeSort {
+    /**
+     * Sort the subarray by the merge.
+     * @param A common array specified for sorting.
+     * @param p the first element of the sorted subarray.
+     * @param r the last element of the sorted subarray.
+     */
     public void sort(int[] A, int p, int r) {
         if (p < r) {
             int q = (p + r) / 2;
@@ -17,6 +23,13 @@ public class MergeSort {
         }
     }
 
+    /**
+     * Sort two sorted subarrays by merge.
+     * @param arr common array.
+     * @param p the first element of the first subarray.
+     * @param q the last element of the first subarray.
+     * @param r the last element of the second subarray.
+     */
     public void merge(int[] arr, int p, int q, int r) {
         int firstArrayPosition = p - 1;
         int firstArrayLastIndex = q - 1;

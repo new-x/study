@@ -1,4 +1,4 @@
-package ru.scratch;
+package ru.merge;
 
 import org.junit.Test;
 
